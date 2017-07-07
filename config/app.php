@@ -1,6 +1,6 @@
 <?php
 
-return [
+$config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -124,6 +124,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'log_max_files' => env('LOG_MAX_FILES',30),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -175,6 +177,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\CaptchaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],
@@ -229,3 +232,19 @@ return [
     ],
 
 ];
+
+//读取模块中的Provider并注入
+$current_dir = opendir(base_path('module'));
+while(($file = readdir($current_dir)) !== false) {
+    if ( $file != '.' && $file != '..')
+    {
+        $cur_path = base_path('module'.DIRECTORY_SEPARATOR.$file);
+        if ( is_dir ( $cur_path ) && file_exists($cur_path.DIRECTORY_SEPARATOR.'ModuleProviders.php'))
+        {
+            $providers = include $cur_path.DIRECTORY_SEPARATOR.'ModuleProviders.php';
+            $config['providers'] = array_merge($config['providers'],$providers);
+        }
+    }
+}
+closedir($current_dir);
+return $config;
