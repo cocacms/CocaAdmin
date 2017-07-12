@@ -12,7 +12,9 @@ namespace Module\AdminBase\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Module\AdminBase\Member;
+use App\Service\ContentService;
 
 class MemberController extends Controller
 {
@@ -25,16 +27,63 @@ class MemberController extends Controller
         if(!captcha_check($data['code'])){
             return response()->json(error_json('验证码错误！'));
         }
-        $memeber = Member::where([
+        $member = Member::where([
             ['username','=',$data['username']],
-            ['password','=',$data['password']]
         ])->first();
 
-        if(is_null($memeber)){
-            return response()->json(error_json('账户密码有误！'));
+        if(is_null($member)){
+            return response()->json(error_json('账户不存在！'));
         }
-        Auth::guard('admin')->login($memeber,true);
+        if(!Hash::check($data['password'],$member->password)){
+            return response()->json(error_json('账户密码有误！'));
+
+        }
+        Auth::guard('admin')->login($member,true);
         return response()->json(success_json());
+    }
+
+    public function changeInfo(){
+        return $this->view('member.changeInfo');
+    }
+
+    public function changePassword(){
+        return $this->view('member.changePassword');
+    }
+
+    public function submitInfo(Request $request){
+        $data = $request->all();
+        $member = Auth::user();
+        $member->avatar = $data['avatar'];
+        $member->nickname = $data['nickname'];
+        $member->birthday = $data['birthday'];
+        $member->sex = $data['sex'];
+        $member->tel = $data['tel'];
+        $member->mail = $data['mail'];
+        if($member->save()){
+            return response()->json(success_json());
+        }else{
+            return response()->json(error_json());
+        }
+    }
+
+    public function submitPassword(Request $request){
+        $data = $request->all();
+        $member = Auth::user();
+
+        if(!Hash::check($data['password'],$member->password)){
+            return response()->json(error_json('密码错误！'));
+        }
+        $member->password = Hash::make($data['newPassword']);
+        if($member->save()){
+            return response()->json(success_json());
+        }else{
+            return response()->json(error_json('修改密码失败！'));
+        }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect(route('adminLogin'));
     }
 
 }

@@ -41,3 +41,37 @@ if(!function_exists('success_json'))
         ];
     }
 }
+
+if(!function_exists('get_current_module'))
+{
+    function get_current_module()
+    {
+        $content = app(App\Service\ContentService::class);
+        return $content->get('currentModule');
+    }
+}
+
+
+if(!function_exists('system_config'))
+{
+    function system_config(...$params)
+    {
+        $content = app(App\Service\ContentService::class);
+        return $content->config(...$params);
+    }
+}
+
+
+if(!function_exists('system_content'))
+{
+    function system_content(...$params)
+    {
+        $content = app(App\Service\ContentService::class);
+        if(count($params) == 2){
+            $content->set($params[0],$params[1]);
+            return true;
+        }else{
+            return $content->get($params[0]);
+        }
+    }
+}

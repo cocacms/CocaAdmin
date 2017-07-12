@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>@yield('title') - 后台管理平台</title>
+    <title>404找不到页面啦！</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,17 +10,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="{{ asset('/layui/css/layui.css') }}" media="all" />
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
-    <link rel="stylesheet" href="{{ asset('/module/AdminBase/css/user.css') }}" media="all" />
-    @section("cssImport")
-    @show
 </head>
 <body class="childrenBody">
-    @section('content')
-        这是主要内容。
-    @show
-<script type="text/javascript" src="{{ asset('/layui/layui.js') }}"></script>
-@section("jsImport")
-@show
+<div style="text-align: center; padding:11% 0;">
+    <i class="layui-icon" style="line-height:20rem; font-size:20rem; color: #393D50;">&#xe61c;</i>
+    <p style="font-size: 20px; font-weight: 300; color: #999;">我勒个去，页面被外星人挟持了!</p>
+</div>
 </body>
 </html>

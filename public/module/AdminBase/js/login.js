@@ -19,7 +19,7 @@ layui.config({
 	form.on("submit(login)",function(data){
 
 		$.ajax({
-			url:'login',
+			url:'../admin/login',
 			type:'post',
 			dataType:'json',
 			data:data.field,
@@ -35,7 +35,7 @@ layui.config({
                         $('[name=password]').val('');
                     }
 				}else{
-					location.href = '/admin'
+					location.href = '../admin'
 				}
             }
 		});

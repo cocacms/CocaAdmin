@@ -173,12 +173,19 @@ $config = [
         /*
          * Application Service Providers...
          */
+
+        Baum\Providers\BaumServiceProvider::class,
+
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\CaptchaServiceProvider::class,
+        App\Providers\DefinedServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\BladeCompomentServiceProvider::class,
+        App\Providers\ContentServiceProvider::class,
+
+        App\Providers\ModuleServiceProvider::class,
 
     ],
 

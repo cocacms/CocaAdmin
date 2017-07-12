@@ -16,7 +16,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 
-class CaptchaServiceProvider extends ServiceProvider
+class DefinedServiceProvider extends ServiceProvider
 {
 
     public function boot()
@@ -33,9 +33,10 @@ class CaptchaServiceProvider extends ServiceProvider
     public function map()
     {
         Route::group(['middleware' => 'web'],function (){
+            //验证码模块
             Route::get('/captcha',function (Request $request){
                 //生成验证码图片的Builder对象，配置相应属性
-                $builder = new CaptchaBuilder((new PhraseBuilder())->build(5, 'ABDEFHJKMPT123456789'));
+                $builder = new CaptchaBuilder((new PhraseBuilder())->build(4, 'ABDEFHJKMPT123456789'));
                 //可以设置图片宽高及字体
                 $builder->build($request->input('w',100), $request->input('h',40));
                 //获取验证码的内容
@@ -49,6 +50,16 @@ class CaptchaServiceProvider extends ServiceProvider
             })->name('captcha');
         });
 
+        //上传模块
+        Route::post('/upload',function(Request $request){
+            $name = $request->input('name');
+            $path = $request->file($name)->store('uploads','public');
+            return response()->json(success_json('storage/'.$path));
+        });
+
+        Route::get('/notFound',function (){
+            return view('notFound');
+        })->name('notFound');
 
     }
 }
