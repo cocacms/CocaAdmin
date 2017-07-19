@@ -28,6 +28,15 @@ class DefinedServiceProvider extends ServiceProvider
             $h = $expression[1];
             return "<?php echo route('captcha',['w'=>$w,'h'=>$h,'t'=>time()]); ?>";
         });
+
+
+        Blade::directive('canshow', function ($expression) {
+            return "<?php if(hasRoutePermission('$expression')){ ?>";
+        });
+
+        Blade::directive('endcanshow', function () {
+            return "<?php } ?>";
+        });
     }
 
     public function map()
@@ -60,6 +69,10 @@ class DefinedServiceProvider extends ServiceProvider
         Route::get('/notFound',function (){
             return view('notFound');
         })->name('notFound');
+
+        Route::get('/notPermission',function (){
+            return view('notPermission');
+        })->name('notPermission');
 
     }
 }

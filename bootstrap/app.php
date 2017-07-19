@@ -14,6 +14,13 @@
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
+/*
+ * 替换掉原有的router
+ */
+
+$router = new App\Service\CRouter($app['events'], $app);
+$router->setRoutes($app['router']->getRoutes());
+$app->instance('router',$router);
 
 /*
 |--------------------------------------------------------------------------

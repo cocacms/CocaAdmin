@@ -1,9 +1,10 @@
 @extends('layout.layout')
 @section('title', '修改密码')
-
+@section('cssImport')
+    @cssimport(user)
+@endsection
 @section('content')
     <form class="layui-form changePwd">
-        {{csrf_field()}}
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">

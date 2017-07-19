@@ -7,5 +7,5 @@
  */
 
 return [
-    Module\AdminBase\Providers\ModuleProvider::class
+    Module\AdminBase\Providers\ModuleProvider::class,
 ];

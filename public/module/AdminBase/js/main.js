@@ -1,5 +1,4 @@
 layui.config({
-	base : "module/AdminBase/js/"
 }).use(['form','element','layer','jquery'],function(){
 	var form = layui.form(),
 		layer = parent.layer === undefined ? layui.layer : parent.layer,

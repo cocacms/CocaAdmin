@@ -3,7 +3,6 @@
 
 @section('content')
 <form class="layui-form">
-    {{ csrf_field() }}
     <table class="layui-table">
         <colgroup>
             <col width="20%">

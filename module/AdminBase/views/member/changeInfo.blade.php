@@ -1,9 +1,10 @@
 @extends('layout.layout')
 @section('title', '编辑个人信息')
-
+@section('cssImport')
+    @cssimport(user)
+@endsection
 @section('content')
     <form class="layui-form">
-        {{ csrf_field() }}
         <div class="user_left">
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名</label>

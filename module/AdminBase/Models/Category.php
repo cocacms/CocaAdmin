@@ -1,19 +1,18 @@
 <?php
-namespace Module\AdminBase;
-
+namespace Module\AdminBase\Models;
 use Baum\Node;
 
 /**
-* Menu
+* Category
 */
-class Menu extends Node {
+class Category extends Node {
 
   /**
    * Table name.
    *
    * @var string
    */
-  protected $table = 'menus';
+  protected $table = 'categories';
 
   //////////////////////////////////////////////////////////////////////////////
 

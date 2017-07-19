@@ -3,7 +3,6 @@ var $form;
 var form;
 var $;
 layui.config({
-	base : "module/AdminBase/js/"
 }).use(['form','layer','upload','laydate'],function(){
 	form = layui.form();
 	var layer = parent.layer === undefined ? layui.layer : parent.layer;

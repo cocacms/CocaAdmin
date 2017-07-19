@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Module\AdminBase\Member;
+use Module\AdminBase\Models\Member;
 use App\Service\ContentService;
 
 class MemberController extends Controller

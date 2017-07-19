@@ -8,21 +8,44 @@ return [
         [
             "title" => "后台首页",
             "icon" => "icon-computer",
-            "href" => route('home'),
+            "href" => 'route[home]',
             "spread" => false
         ],
         [
             "title" => "系统基本参数",
             "icon" => "&#xe631;",
-            "href" => route('config'),
+            "href" => 'route[system@config]',
             "spread" => false
         ],
+//        [
+//            "title" => "文章列表",
+//            "icon" => "icon-text",
+//            "href" => "page/news/newsList.html",
+//            "spread" => false
+//        ],
+
         [
-            "title" => "文章列表",
-            "icon" => "icon-text",
-            "href" => "page/news/newsList.html",
-            "spread" => false
-        ], [
+            'title' => '角色与权限',
+            "icon" => "&#xe627;",
+            "href" => "",
+            "spread" => false,
+            'children' => [
+                [
+                    "title" => "角色管理",
+                    "icon" => "&#xe612;",
+                    "href" => 'route[role@index]',
+                    "spread" => false
+                ],
+                [
+                    "title" => "用户管理",
+                    "icon" => "&#xe613;",
+                    "href" => "page/links/linksList.html",
+                    "spread" => false
+                ],
+
+            ]
+        ],
+        [
             "title" => "友情链接",
             "icon" => "&#xe64c;",
             "href" => "page/links/linksList.html",

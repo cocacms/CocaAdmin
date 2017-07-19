@@ -33,6 +33,7 @@ class ModuleServiceProvider extends ServiceProvider
             }
             closedir($current_dir);
 
+            //读取配置与目录信息
             foreach ($this->modules as $module){
                 if(file_exists(base_path('module'.DIRECTORY_SEPARATOR.$module.DIRECTORY_SEPARATOR.'config.php'))){
                     $config = include base_path('module'.DIRECTORY_SEPARATOR.$module.DIRECTORY_SEPARATOR.'config.php');
