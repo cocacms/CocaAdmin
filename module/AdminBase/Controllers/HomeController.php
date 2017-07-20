@@ -69,6 +69,8 @@ class HomeController extends Controller
             }
             if(isset($item['children']) && count($item['children']) > 0){
                 $item['children'] = $this->handlerMenu($item['children'],$permissions);
+                if (empty($item['children']))
+                    array_splice($menu,$index,1);
             }
         }
 

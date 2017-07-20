@@ -37,9 +37,9 @@ return [
                     "spread" => false
                 ],
                 [
-                    "title" => "用户管理",
+                    "title" => "管理员管理",
                     "icon" => "&#xe613;",
-                    "href" => "page/links/linksList.html",
+                    "href" => "route[member@index]",
                     "spread" => false
                 ],
 

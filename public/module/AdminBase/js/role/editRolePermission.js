@@ -7,7 +7,9 @@ layui.config({
 
     form.on("submit(editRolePermission)",function(data){
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+        var url = $(this).data('url');
         $.ajax({
+            url:url,
             type:'post',
             dataType:'json',
             data:data.field,

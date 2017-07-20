@@ -12,9 +12,12 @@ namespace Module\AdminBase\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Module\AdminBase\Models\Member;
 use App\Service\ContentService;
+use Module\AdminBase\Models\Role;
+use Module\AdminBase\Models\RoleMemberRelation;
 
 class MemberController extends Controller
 {
@@ -83,7 +86,102 @@ class MemberController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect(route('adminLogin'));
+        return redirect(route('admin@login'));
+    }
+
+
+    public function index(Request $request){
+        return $this->view('member.index');
+    }
+
+    public function _list(){
+        $data = Member::paginate(20);
+        $data = $data->toArray();
+        $data['data'] = collect($data['data'])->map(function ($item){
+            $item['avatar'] = asset($item['avatar']);
+            switch ($item['sex']){
+                case 1:
+                    $item['sex'] = '男';
+                    break;
+                case 2:
+                    $item['sex'] = '女';
+                    break;
+                default:
+                    $item['sex'] = '保密';
+            }
+            return $item;
+        });
+        return response()->json(success_json($data));
+    }
+
+    public function edit($id = null){
+        $roles = Role::all()->toArray();
+        foreach ($roles as &$role){
+            $role['checked'] = 0;
+        }
+        if (is_null($id)){
+            $member = new Member();
+        }else{
+            $member = Member::find($id);
+            $relations = RoleMemberRelation::where('member_id','=',$id)->get();
+            foreach ($relations as $relation){
+                foreach ($roles as &$role){
+                    if($role['id'] == $relation->role_id){
+                        $role['checked'] = 1;
+                    }
+                }
+            }
+        }
+        return $this->view('member.edit',[
+            'member'=>$member,
+            'id' => is_null($id) ? '' : $id,
+            'roles' =>$roles
+        ]);
+    }
+
+    public function submit(Request $request,$id = null){
+        $input = $request->only('username','password','avatar','nickname','sex','tel','birthday','mail');
+        $roles = array_keys($request->input('role',[]));
+
+        DB::beginTransaction();
+        try{
+            if(is_null($id)){
+                $input['password'] = Hash::make($input['password']);
+                $member = Member::create($input);
+                $id = $member->id;
+            }else{
+                unset($input['username']);
+                if(!empty(trim($input['password']))){
+                    $input['password'] = Hash::make($input['password']);
+                }else{
+                    unset($input['password']);
+                }
+                $member = Member::find($id);
+                $member->update($input);
+
+            }
+
+            RoleMemberRelation::where('member_id','=',$id)->delete();
+            $data = [];
+            foreach ($roles as $role){
+                $data[] = [
+                    'member_id'=>$id,
+                    'role_id'=>$role
+                ];
+            }
+            DB::table('role_member_relations')->insert($data);
+        }catch (\Exception $e){
+            DB::rollBack();
+            switch ($e->getCode()){
+                case '23000':
+                    return response()->json(error_json('账号已经存在'));
+                    break;
+                default:
+                    return response()->json(error_json($e->getMessage()));
+            }
+        }
+        DB::commit();
+        return response()->json(success_json());
     }
 
 }

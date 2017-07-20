@@ -9,7 +9,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名</label>
                 <div class="layui-input-block">
-                    <input type="text" value="{{$member->username}}" disabled class="layui-input layui-disabled">
+                    <input type="text" value="{{$_member->username}}" disabled class="layui-input layui-disabled">
                 </div>
             </div>
             <!--
@@ -23,27 +23,27 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">真实姓名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="nickname" value="{{$member->nickname}}" placeholder="请输入真实姓名" lay-verify="required" class="layui-input realName">
+                    <input type="text" name="nickname" value="{{$_member->nickname}}" placeholder="请输入真实姓名" lay-verify="required" class="layui-input realName">
                 </div>
             </div>
             <div class="layui-form-item" pane="">
                 <label class="layui-form-label">性别</label>
                 <div class="layui-input-block userSex">
-                    <input type="radio" name="sex" value="1" title="男" {{$member->sex == 1 ? 'checked=""' : ''}}>
-                    <input type="radio" name="sex" value="2" title="女" {{$member->sex == 2 ? 'checked=""' : ''}}>
-                    <input type="radio" name="sex" value="0" title="保密" {{$member->sex == 0 ? 'checked=""' : ''}}>
+                    <input type="radio" name="sex" value="1" title="男" {{$_member->sex == 1 ? 'checked=""' : ''}}>
+                    <input type="radio" name="sex" value="2" title="女" {{$_member->sex == 2 ? 'checked=""' : ''}}>
+                    <input type="radio" name="sex" value="0" title="保密" {{$_member->sex == 0 ? 'checked=""' : ''}}>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">手机号码</label>
                 <div class="layui-input-block">
-                    <input type="tel" name="tel" value="{{$member->tel}}" placeholder="请输入手机号码" lay-verify="required|phone" class="layui-input userPhone">
+                    <input type="tel" name="tel" value="{{$_member->tel}}" placeholder="请输入手机号码" lay-verify="required|phone" class="layui-input userPhone">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">出生年月</label>
                 <div class="layui-input-block">
-                    <input type="text" name="birthday" value="{{$member->birthday}}" placeholder="请输入出生年月" lay-verify="required|date" onclick="layui.laydate({elem: this,max: laydate.now()})" class="layui-input userBirthday">
+                    <input type="text" name="birthday" value="{{$_member->birthday}}" placeholder="请输入出生年月" lay-verify="required|date" onclick="layui.laydate({elem: this,max: laydate.now()})" class="layui-input userBirthday">
                 </div>
             </div>
             <!--
@@ -86,7 +86,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-block">
-                    <input type="text" name="mail" value="{{$member->mail}}" placeholder="请输入邮箱" lay-verify="required|email" class="layui-input userEmail">
+                    <input type="text" name="mail" value="{{$_member->mail}}" placeholder="请输入邮箱" lay-verify="required|email" class="layui-input userEmail">
                 </div>
             </div>
             <!--
@@ -100,10 +100,10 @@
         </div>
         <div class="user_right">
             {{--<p>由于是纯静态页面，所以只能显示一张随机的图片</p>--}}
-            <img src="{{asset($member->avatar)}}" class="layui-circle" id="userFace">
+            <img src="{{asset($_member->avatar)}}" class="layui-circle" id="userFace">
             <br/><br/>
             <input type="file" name="userFace" class="layui-upload-file" lay-title="掐指一算，我要换一个头像了">
-            <input type="hidden" name="avatar" value="{{$member->avatar}}">
+            <input type="hidden" name="avatar" value="{{$_member->avatar}}">
         </div>
         <div class="layui-form-item" style="margin-left: 5%;">
             <div class="layui-input-block">

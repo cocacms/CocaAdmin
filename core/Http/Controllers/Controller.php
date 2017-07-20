@@ -30,7 +30,7 @@ class Controller extends BaseController
     protected function view($view = null, $data = [], $mergeData = []){
 
         if(Auth::check()){
-            View::share('member',Auth::user());
+            View::share('_member',Auth::user());
         }
         $factory = app(ViewFactory::class);
         if (func_num_args() === 0) {

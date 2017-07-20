@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Module\AdminBase\Models\Permission;
 use Module\AdminBase\Models\Role;
 
 class RoleController extends Controller
@@ -21,14 +22,15 @@ class RoleController extends Controller
         return $this->view('role.index');
     }
 
-    public function edit(Request $request,$id = null){
+    public function edit($id = null){
         if (is_null($id)){
             $role = new Role();
         }else{
             $role = Role::find($id);
         }
         return $this->view('role.edit',[
-            'role'=>$role
+            'role'=>$role,
+            'id' => is_null($id) ? '' : $id
         ]);
     }
 
@@ -55,11 +57,16 @@ class RoleController extends Controller
 
     public function del(Request $request){
         $data = $request->input('ids',array());
-        if(Role::destroy(array_values($data)) > 0){
-            return response()->json(success_json());
-        }else{
-            return response()->json(error_json());
+        DB::beginTransaction();
+        try{
+            Role::destroy(array_values($data));
+            Permission::whereIn('role_id',array_values($data))->delete();
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(error_json($e->getMessage()));
         }
+        DB::commit();
+        return response()->json(success_json());
     }
 
     public function editPermission($id){
@@ -84,7 +91,7 @@ class RoleController extends Controller
             }
         }
 
-        return $this->view('role.editPermission',['routeGroup' => $routeList]);
+        return $this->view('role.editPermission',['routeGroup' => $routeList,'id'=>$id]);
     }
 
     public function submitPermission(Request $request,$id){

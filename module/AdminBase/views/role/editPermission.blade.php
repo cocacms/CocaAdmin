@@ -25,7 +25,7 @@
         @endforeach
         <div class="layui-form-item">
             <div style="text-align: center">
-                <button class="layui-btn" lay-submit="" lay-filter="editRolePermission">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="editRolePermission" data-url="{{route('role@submitPermission',['id'=>$id])}}">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -34,5 +34,5 @@
 @endsection
 
 @section('jsImport')
-    @jsimport(editRolePermission)
+    @jsimport(role/editRolePermission)
 @endsection

@@ -23,9 +23,31 @@
     @show
 <script type="text/javascript" src="{{ asset('/layui/layui.js') }}"></script>
 <script>
+    window.uploadUrl = '{{route('webUpload')}}';
+    window.baseUrl = '{{asset('')}}';
     layui.config({
-    }).use(['jquery'],function(){
+    }).use(['jquery','form'],function(){
         var $  = layui.jquery;
+        var form = layui.form();
+        form.verify({
+            username: function(value, item) {
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+            },
+            length: function(value, item) {
+                var length = $(item).attr('v-length');
+                if(length == undefined){
+                    length = '0,999';
+                }
+                var minmax = length.split(',');
+
+                if (value.length < minmax[0] || value.length > minmax[1]) {
+                    return '输入长度必须'+minmax[0]+'到'+minmax[1]+'位';
+                }
+            }
+        });
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

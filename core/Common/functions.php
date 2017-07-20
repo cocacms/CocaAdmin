@@ -92,7 +92,11 @@ if(!function_exists('hasRoutePermission'))
 
         if (!$route instanceof \App\Service\Route){
             $routeCollection = \Illuminate\Support\Facades\Route::getRoutes();
+            $routeName = $route;
             $route = $routeCollection->getByName($route);
+            if ($route == null){
+                throw new \App\Exceptions\UndefinedRouteException($routeName);
+            }
         }
 
         if($route->link !== null){

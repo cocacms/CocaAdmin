@@ -7,14 +7,15 @@ layui.config({
 
     //加载页面数据
     var loadData = function () {
+        var url = $('#table').data('url');
         $.ajax({
-            url : "../admin/role/list",
+            url : url,
             type : "get",
             dataType : "json",
             success : function(data){
                 if(data.code == 1){
                     //执行加载数据的方法
-                    linksList(data.data);
+                    list(data.data);
                 }
 
             }
@@ -23,43 +24,36 @@ layui.config({
     };
     loadData();
     //添加角色
-    $(".linksAdd_btn").click(function(){
+    $(".rolesAdd_btn").click(function(){
+        var url = $(this).data('url');
         var index = layui.layer.open({
             title : "添加角色",
             type : 2,
-            content : "../admin/role/edit",
+            content : url,
+            area: ['470px', '230px'],
             success : function(layero, index){
-                setTimeout(function(){
-                    layui.layer.tips('点击此处返回友链列表', '.layui-layer-setwin .layui-layer-close', {
-                        tips: 3
-                    });
-                },500)
             },
             end:function () {
                 loadData();
             }
         });
-        //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
-        $(window).resize(function(){
-            layui.layer.full(index);
-        });
-        layui.layer.full(index);
     });
 
     //批量删除
     $(".batchDel").click(function(){
-        var $checkbox = $('.links_list tbody input[type="checkbox"][name="checked"]');
-        var $checked = $('.links_list tbody input[type="checkbox"][name="checked"]:checked');
+        var url = $(this).data('url');
+        var $checkbox = $('.roles_list tbody input[type="checkbox"][name="checked"]');
+        var $checked = $('.roles_list tbody input[type="checkbox"][name="checked"]:checked');
         if($checkbox.is(":checked")){
             layer.confirm('确定删除选中的信息？',{icon:3, title:'提示信息'},function(index){
                 var index = layer.msg('删除中，请稍候',{icon: 16,time:false,shade:0.8});
                 //删除数据
                 var ids = [];
                 for(var j=0;j<$checked.length;j++){
-                    ids.push($checked.eq(j).parents("tr").find(".links_del").data("id"));
+                    ids.push($checked.eq(j).parents("tr").find(".roles_del").data("id"));
                 }
                 $.ajax({
-                    url : '',
+                    url : url,
                     type: 'DELETE',
                     data:{ids:ids},
                     success:function (data) {
@@ -100,40 +94,32 @@ layui.config({
     });
 
     //操作
-    $("body").on("click",".links_edit",function(){  //编辑
-        // layer.alert('您点击了友情链接编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'友链编辑'});
+    $("body").on("click",".roles_edit",function(){  //编辑
+        var url = $(this).data('url');
         var id = $(this).data('id');
         var index = layui.layer.open({
             title : "编辑角色",
             type : 2,
-            content : "../admin/role/edit/"+id,
+            content : url +"/"+id,
+            area: ['470px', '230px'],
             success : function(layero, index){
-                setTimeout(function(){
-                    layui.layer.tips('点击此处返回友链列表', '.layui-layer-setwin .layui-layer-close', {
-                        tips: 3
-                    });
-                },500)
             },
             end:function () {
                 loadData();
             }
         });
-        //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
-        $(window).resize(function(){
-            layui.layer.full(index);
-        });
-        layui.layer.full(index);
     });
 
     //操作
-    $("body").on("click",".links_edit_permission",function(){  //编辑
+    $("body").on("click",".roles_edit_permission",function(){  //编辑
         var id = $(this).data('id');
+        var url = $(this).data('url');
         var index = layui.layer.open({
             title : "编辑角色权限",
             type : 2,
             area: ['800px', '500px'],
             offset: '100px',
-            content : "../admin/role/editPermission/"+id
+            content : url +  "/" +id
         });
         //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
         // $(window).resize(function(){
@@ -142,13 +128,14 @@ layui.config({
         // layui.layer.full(index);
     });
 
-    $("body").on("click",".links_del",function(){  //删除
+    $("body").on("click",".roles_del",function(){  //删除
+        var url = $(this).data('url');
         var _this = $(this);
         layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
             //_this.parents("tr").remove();
             var id = _this.data("id");
             $.ajax({
-                url : '',
+                url : url,
                 type: 'DELETE',
                 data:{ids:[id]},
                 success:function (data) {
@@ -164,10 +151,10 @@ layui.config({
         });
     });
 
-    function linksList(that){
+    function list(that){
         var getTpl = $('#table-tpl').html();
         laytpl(getTpl).render(that, function(html){
-            $('.links_content').html(html);
+            $('.roles_content').html(html);
             form.render();
         });
     }

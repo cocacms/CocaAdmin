@@ -61,10 +61,13 @@ class DefinedServiceProvider extends ServiceProvider
 
         //上传模块
         Route::post('/upload',function(Request $request){
-            $name = $request->input('name');
-            $path = $request->file($name)->store('uploads','public');
+            $name = $request->input('name','file');
+            $file = $request->file($name,null);
+            if(is_null($file))
+                return response()->json(error_json('没有获取到上传的文件！'));
+            $path = $file->store('uploads','public');
             return response()->json(success_json('storage/'.$path));
-        });
+        })->name('webUpload');
 
         Route::get('/notFound',function (){
             return view('notFound');

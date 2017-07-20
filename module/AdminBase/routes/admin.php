@@ -33,6 +33,17 @@ Route::group(['middleware'=>'web'],function(){
             Route::delete('/del','RoleController@del')->name('role@del')->permissionName('删除角色');
 
         },'角色设置');
+
+        Route::group(['prefix'=>'member'],function (){
+            Route::get('/list','MemberController@_list')->name('member@list')->permissionName('获取管理员列表');
+            Route::get('/','MemberController@index')->name('member@index')->link('member@list');
+
+            Route::post('/edit/{id?}','MemberController@submit')->name('member@submit')->permissionName('编辑创建管理员');
+            Route::get('/edit/{id?}','MemberController@edit')->name('member@edit')->link('member@submit');
+
+            Route::delete('/del','MemberController@del')->name('member@del')->permissionName('删除用户');
+
+        },'管理员管理');
     });
 
     Route::get('/login','MemberController@login')->name('admin@login');

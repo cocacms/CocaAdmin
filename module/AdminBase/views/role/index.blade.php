@@ -5,18 +5,18 @@
     <blockquote class="layui-elem-quote news_search">
         @canshow(role@edit)
         <div class="layui-inline">
-            <a class="layui-btn linksAdd_btn" style="background-color:#5FB878">添加角色</a>
+            <a class="layui-btn rolesAdd_btn" style="background-color:#5FB878" data-url="{{route('role@edit')}}">添加角色</a>
         </div>
         @endcanshow
         @canshow(role@del)
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
+            <a class="layui-btn layui-btn-danger batchDel" data-url="{{route('role@del')}}">批量删除</a>
         </div>
         @endcanshow
         <div class="clear-float"></div>
     </blockquote>
-    <div class="layui-form links_list">
-        <table class="layui-table">
+    <div class="layui-form roles_list">
+        <table id="table" class="layui-table" data-url="{{route('role@list')}}">
             <colgroup>
                 <col width="50"/>
                 <col width="80%"/>
@@ -29,7 +29,7 @@
                 <th>操作</th>
             </tr>
             </thead>
-            <tbody class="links_content"></tbody>
+            <tbody class="roles_content"></tbody>
         </table>
     </div>
 
@@ -40,11 +40,11 @@
             <td align="left">@{{ item.name }}</td>
             <td>
                 @canshow(role@edit)
-                <a class="layui-btn layui-btn-mini links_edit" data-id="@{{ item.id }}"><i class="iconfont icon-edit"></i> 编辑</a>
+                <a class="layui-btn layui-btn-mini roles_edit" data-id="@{{ item.id }}" data-url="{{route('role@edit')}}"><i class="iconfont icon-edit"></i> 编辑</a>
                 @endcanshow
-                <a class="layui-btn layui-btn-mini links_edit_permission" data-id="@{{ item.id }}"><i class="coca-icon coca-icon-quanxian2"></i> 设置权限</a>
+                <a class="layui-btn layui-btn-mini roles_edit_permission" data-id="@{{ item.id }}" data-url="{{route('role@permissionEdit',['id'=>''])}}"><i class="coca-icon coca-icon-quanxian2"></i> 设置权限</a>
                 @canshow(role@del)
-                <a class="layui-btn layui-btn-danger layui-btn-mini links_del" data-id="@{{ item.id }}"><i class="layui-icon">&#xe640;</i> 删除</a>
+                <a class="layui-btn layui-btn-danger layui-btn-mini roles_del" data-id="@{{ item.id }}" data-url="{{route('role@del')}}"><i class="layui-icon">&#xe640;</i> 删除</a>
                 @endcanshow
             </td>
         </li>
@@ -62,5 +62,5 @@
 @endsection
 
 @section('jsImport')
-    @jsimport(role)
+    @jsimport(role/role)
 @endsection

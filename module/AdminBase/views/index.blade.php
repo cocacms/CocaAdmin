@@ -90,8 +90,8 @@
 					-->
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
-							<img src="{{asset($member->avatar)}}" class="layui-circle" width="35" height="35">
-							<cite>{{$member->nickname or $member->username}}</cite>
+							<img src="{{asset($_member->avatar)}}" class="layui-circle" width="35" height="35">
+							<cite>{{$_member->nickname or $_member->username}}</cite>
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="{{route('changeInfo')}}"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
