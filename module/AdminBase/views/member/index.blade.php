@@ -19,7 +19,8 @@
         <table id="table" class="layui-table" data-url="{{route('member@list')}}">
             <colgroup>
                 <col width="50"/>
-                <col width="20%"/>
+                <col width="5%"/>
+                <col width="15%"/>
                 <col width="10%"/>
                 <col width="5%"/>
                 <col width="20%"/>
@@ -30,7 +31,8 @@
             <thead>
             <tr>
                 <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-                <th style="text-align:left;">账户</th>
+                <th style="text-align:left;">ID</th>
+                <th>账户</th>
                 <th>头像</th>
                 <th>性别</th>
                 <th>手机</th>
@@ -48,7 +50,8 @@
         @{{#  layui.each(d, function(index, item){ }}
         <li>
             <td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
-            <td align="left">@{{ item.username }}</td>
+            <td align="left">@{{ item.id }}</td>
+            <td>@{{ item.username }}</td>
             <td><img class="layui-circle" width="50px" src="@{{ item.avatar }}"></td>
             <td>@{{ item.sex }}</td>
             <td>@{{ item.tel }}</td>

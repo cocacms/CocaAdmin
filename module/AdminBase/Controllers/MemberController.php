@@ -184,4 +184,18 @@ class MemberController extends Controller
         return response()->json(success_json());
     }
 
+    public function del(Request $request){
+        $data = $request->input('ids',array());
+        DB::beginTransaction();
+        try{
+            Member::destroy(array_values($data));
+            RoleMemberRelation::whereIn('member_id',array_values($data))->delete();
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(error_json($e->getMessage()));
+        }
+        DB::commit();
+        return response()->json(success_json());
+    }
+
 }

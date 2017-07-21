@@ -188,3 +188,7 @@
 .clear-float{
 	clear: both;
 }
+
+.layui-table, .layui-table th {
+	text-align: center;
+}

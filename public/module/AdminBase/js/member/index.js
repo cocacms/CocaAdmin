@@ -56,7 +56,7 @@ layui.config({
                 //删除数据
                 var ids = [];
                 for(var j=0;j<$checked.length;j++){
-                    ids.push($checked.eq(j).parents("tr").find(".links_del").data("id"));
+                    ids.push($checked.eq(j).parents("tr").find(".del_btn").data("id"));
                 }
                 $.ajax({
                     url : url,
