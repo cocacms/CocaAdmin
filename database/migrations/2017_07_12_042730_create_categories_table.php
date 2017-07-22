@@ -24,8 +24,8 @@ class CreateCategoriesTable extends Migration {
       $table->integer('depth')->nullable();
 
       // Add needed columns here (f.ex: name, slug, path, etc.)
-      // $table->string('name', 255);
-
+      $table->string('name', 255)->nullable();
+      $table->string('tag', 25)->nullable()->unique();
       $table->timestamps();
     });
   }

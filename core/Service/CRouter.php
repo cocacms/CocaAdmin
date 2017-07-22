@@ -4,7 +4,7 @@ use Illuminate\Routing\Router;
 
 class CRouter extends Router
 {
-    protected $groupName;
+    protected $groupName = [];
     protected function newRoute($methods, $uri, $action)
     {
         return (new Route($methods, $uri, $action))
@@ -14,12 +14,12 @@ class CRouter extends Router
 
     public function getCurrentGroupName()
     {
-        return $this->groupName;
+        return  end($this->groupName);
     }
 
     public function group(array $attributes, $routes,$name = null)
     {
-        if($name !== null) $this->groupName = $name;
+        if($name !== null) array_push($this->groupName,$name);
         $this->updateGroupStack($attributes);
 
         // Once we have updated the group stack, we'll load the provided routes and
@@ -28,5 +28,6 @@ class CRouter extends Router
         $this->loadRoutes($routes);
 
         array_pop($this->groupStack);
+        if($name !== null) array_pop($this->groupName);
     }
 }

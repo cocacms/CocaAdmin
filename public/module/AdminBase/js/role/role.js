@@ -117,7 +117,7 @@ layui.config({
         var index = layui.layer.open({
             title : "编辑角色权限",
             type : 2,
-            area: ['800px', '500px'],
+            area: ['1000px', '650px'],
             offset: '100px',
             content : url +  "/" +id
         });

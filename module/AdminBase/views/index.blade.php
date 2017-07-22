@@ -11,8 +11,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="icon" href="favicon.ico">
-	<link rel="stylesheet" href="{{ asset('/layui/css/layui.css') }}" media="all" />
 	<link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+	<link rel="stylesheet" href="{{config('icon.css')}}" media="all" />
+	<link rel="stylesheet" href="{{ asset('/layui/css/layui.css') }}" media="all" />
 	<link rel="stylesheet" href="{{ asset('/module/AdminBase/css/main.css') }}" media="all" />
 </head>
 <body class="main_body">
@@ -146,6 +147,7 @@
 	<div class="site-mobile-shade"></div>
 
 	<script type="text/javascript" src="{{ asset('/layui/layui.js') }}"></script>
+	<script type="text/javascript" src="{{config('icon.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('/module/AdminBase/js/leftNav.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/module/AdminBase/js/index.js') }}"></script>
 </body>

@@ -205,11 +205,11 @@ layui.config({
 	$("body").on("click",".layui-nav .layui-nav-item a",function(){
 		//如果不存在子级
 		if($(this).siblings().length == 0){
-			addTab($(this));
+            addTab($(this));
 			$(this).parent("li").siblings().removeClass("layui-nav-itemed");
 			$('body').removeClass('site-mobile');  //移动端点击菜单关闭菜单层
 		}
-	})
+	});
 
 	//公告层
 	function showNotice(){
@@ -254,10 +254,10 @@ layui.config({
 		var openTitle = '';
 		for(var i=0;i<menu.length;i++){
 			openTitle = '';
-			if(menu[i].icon.split("-")[0] == 'icon'){
-				openTitle += '<i class="iconfont '+menu[i].icon+'"></i>';
-			}else{
-				openTitle += '<i class="layui-icon">'+menu[i].icon+'</i>';
+			if(menu[i].icon.length == 1){
+                openTitle += '<i class="layui-icon">'+menu[i].icon+'</i>';
+            }else{
+                openTitle += '<i class="'+menu[i].icon+'"></i>';
 			}
 			openTitle += '<cite>'+menu[i].title+'</cite>';
 			openTitle += '<i class="layui-icon layui-unselect layui-tab-close" data-id="'+menu[i].layId+'">&#x1006;</i>';

@@ -29,7 +29,7 @@ layui.config({
 
     };
     loadData(currentPage);
-    //添加角色
+    //添加
     $(".add_btn").click(function(){
         var url = $(this).data('url');
         var index = layui.layer.open({
@@ -64,7 +64,7 @@ layui.config({
                     data:{ids:ids},
                     success:function (data) {
                         if(data.code == 1){
-                            loadData();
+                            loadData(currentPage);
                             layer.msg("删除成功");
                         }else{
                             layer.alert(data.msg, {icon: 2});
@@ -86,7 +86,7 @@ layui.config({
         form.render('checkbox');
     });
 
-    //通过判断文章是否全部选中来确定全选按钮是否选中
+    //通过判断是否全部选中来确定全选按钮是否选中
     form.on("checkbox(choose)",function(data){
         var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"])');
         var childChecked = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"]):checked')
@@ -99,8 +99,8 @@ layui.config({
         form.render('checkbox');
     });
 
-    //操作
-    $("body").on("click",".edit_btn",function(){  //编辑
+    //编辑操作
+    $("body").on("click",".edit_btn",function(){
         var url = $(this).data('url');
         var id = $(this).data('id');
         var index = layui.layer.open({
@@ -121,8 +121,8 @@ layui.config({
         // layui.layer.full(index);
     });
 
-
-    $("body").on("click",".del_btn",function(){  //删除
+    //删除操作
+    $("body").on("click",".del_btn",function(){
         var url = $(this).data('url');
         var _this = $(this);
         layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
@@ -133,7 +133,7 @@ layui.config({
                 data:{ids:[id]},
                 success:function (data) {
                     if(data.code == 1){
-                        loadData();
+                        loadData(currentPage);
                         layer.msg("删除成功！");
                     }else{
                         layer.alert(data.msg, {icon: 2});
@@ -144,6 +144,7 @@ layui.config({
         });
     });
 
+    //展示数据
     function list(that){
         var getTpl = $('#table-tpl').html();
         laytpl(getTpl).render(that.data, function(html){

@@ -44,6 +44,39 @@ Route::group(['middleware'=>'web'],function(){
             Route::delete('/del','MemberController@del')->name('member@del')->permissionName('删除用户');
 
         },'管理员管理');
+
+        Route::group(['prefix'=>'category'],function (){
+            Route::get('/list','CategoryController@_list')->name('category@list')->permissionName('获取分类列表');
+            Route::get('/','CategoryController@index')->name('category@index')->link('category@list');
+
+            Route::post('/{id}','CategoryController@postAdd')->name('category@postAdd')->permissionName('创建分类')->where('id', '[0-9]+');
+            Route::get('/{id}','CategoryController@add')->name('category@add')->link('category@postAdd')->where('id', '[0-9]+'); //id =》 分类域id
+
+            Route::post('/edit/{id}','CategoryController@postEdit')->name('category@postEdit')->permissionName('编辑分类');
+            Route::get('/edit/{id}','CategoryController@edit')->name('category@edit')->link('category@postEdit');
+
+            Route::delete('/{id}','CategoryController@del')->name('category@del')->permissionName('删除分类')->where('id', '[0-9]+');
+
+            Route::post('/up/{id?}','CategoryController@moveUp')->name('category@moveUp')->permissionName('上移分类');
+            Route::post('/down/{id?}','CategoryController@moveDown')->name('category@moveDown')->permissionName('下移分类');
+
+
+            Route::group(['prefix'=>'root'],function (){
+                Route::get('/list','CategoryRootController@_list')->name('category@rootList')->permissionName('获取分类域列表');
+                Route::get('/','CategoryRootController@index')->name('category@rootIndex')->link('category@rootList');
+
+                Route::post('/','CategoryRootController@postAdd')->name('category@rootPostAdd')->permissionName('创建分类域');
+                Route::get('/addPage','CategoryRootController@add')->name('category@rootAdd')->link('category@rootPostAdd'); //id =》 分类域id
+
+                Route::post('/edit/{id}','CategoryRootController@postEdit')->name('category@rootPostEdit')->permissionName('编辑分类域');
+                Route::get('/edit/{id}','CategoryRootController@edit')->name('category@rootEdit')->link('category@rootPostEdit');
+
+                Route::delete('/{id}','CategoryRootController@del')->name('category@rootDel')->permissionName('删除分类域');
+
+            },'分类域管理');
+
+
+        },'分类管理');
     });
 
     Route::get('/login','MemberController@login')->name('admin@login');

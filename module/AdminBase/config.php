@@ -7,38 +7,32 @@ return [
     'menu' => [
         [
             "title" => "后台首页",
-            "icon" => "icon-computer",
+            "icon" => "iconfont icon-computer",
             "href" => 'route[home]',
             "spread" => false
         ],
         [
             "title" => "系统基本参数",
-            "icon" => "&#xe631;",
+            "icon" => "coca-icon coca-icon-xitongpeizhi",
             "href" => 'route[system@config]',
             "spread" => false
         ],
-//        [
-//            "title" => "文章列表",
-//            "icon" => "icon-text",
-//            "href" => "page/news/newsList.html",
-//            "spread" => false
-//        ],
 
         [
             'title' => '角色与权限',
-            "icon" => "&#xe627;",
+            "icon" => "coca-icon coca-icon-quanxian2",
             "href" => "",
             "spread" => false,
             'children' => [
                 [
                     "title" => "角色管理",
-                    "icon" => "&#xe612;",
+                    "icon" => "coca-icon coca-icon-quanxian5",
                     "href" => 'route[role@index]',
                     "spread" => false
                 ],
                 [
                     "title" => "管理员管理",
-                    "icon" => "&#xe613;",
+                    "icon" => "coca-icon coca-icon-guanwangicon31315",
                     "href" => "route[member@index]",
                     "spread" => false
                 ],
@@ -46,31 +40,27 @@ return [
             ]
         ],
         [
-            "title" => "友情链接",
-            "icon" => "&#xe64c;",
-            "href" => "page/links/linksList.html",
-            "spread" => false
+            "title" => "分类管理",
+            "icon" => "coca-icon coca-icon-cloud-classify",
+            "href" => "",
+            "spread" => false,
+            "children" => [
+                [
+                    "title" => "分类域管理",
+                    "icon" => "coca-icon coca-icon-fenleizukuaier",
+                    "href" => 'route[category@rootIndex]',
+                    "spread" => false
+
+                ],
+                [
+                    "title" => "分类管理",
+                    "icon" => "coca-icon coca-icon-cloud-classify",
+                    "href" => 'route[category@index]',
+                    "spread" => false
+
+                ]
+            ]
         ],
-//        [
-//            "title" => "其他页面",
-//            "icon" => "&#xe630;",
-//            "href" => "",
-//            "spread" => false,
-//            "children" => [
-//                [
-//                    "title" => "404页面",
-//                    "icon" => "&#xe61c;",
-//                    "href" => "page/404.html",
-//                    "spread" => false
-//                ],
-//                [
-//                    "title" => "登录",
-//                    "icon" => "&#xe609;",
-//                    "href" => "page/login/login.html",
-//                    "spread" => false,
-//                    "target" => "_blank"
-//                ]
-//            ]
-//        ]
+
     ]
 ];

@@ -22,21 +22,6 @@ class DefinedServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-        Blade::directive('captcha', function ($expression) {
-            $expression = explode(',',$expression);
-            $w = $expression[0];
-            $h = $expression[1];
-            return "<?php echo route('captcha',['w'=>$w,'h'=>$h,'t'=>time()]); ?>";
-        });
-
-
-        Blade::directive('canshow', function ($expression) {
-            return "<?php if(hasRoutePermission('$expression')){ ?>";
-        });
-
-        Blade::directive('endcanshow', function () {
-            return "<?php } ?>";
-        });
     }
 
     public function map()

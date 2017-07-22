@@ -48,6 +48,10 @@ class ModuleServiceProvider extends ServiceProvider
                     system_content('_modules',$moduleConfig);
 
                 }
+
+                if(file_exists(base_path('module'.DIRECTORY_SEPARATOR.$module.DIRECTORY_SEPARATOR.'functions.php'))){
+                    require_once base_path('module'.DIRECTORY_SEPARATOR.$module.DIRECTORY_SEPARATOR.'functions.php');
+                }
             }
         });
 

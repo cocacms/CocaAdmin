@@ -26,7 +26,7 @@ class RoleController extends Controller
         if (is_null($id)){
             $role = new Role();
         }else{
-            $role = Role::find($id);
+            $role = Role::findOrFail($id);
         }
         return $this->view('role.edit',[
             'role'=>$role,
@@ -44,7 +44,7 @@ class RoleController extends Controller
         if(is_null($id)){
             $role = new Role();
         }else{
-            $role = Role::find($id);
+            $role = Role::findOrFail($id);
         }
         $role->name = $input['name'];
         if($role->save()){
@@ -70,7 +70,7 @@ class RoleController extends Controller
     }
 
     public function editPermission($id){
-        $permissions = Role::find($id)->permissions->map(function ($permission){
+        $permissions = Role::findOrFail($id)->permissions->map(function ($permission){
             return strtolower($permission->uri.'@'.$permission->method);
         })->toArray();
         $routes = Route::getRoutes()->getRoutes();

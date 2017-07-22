@@ -27,7 +27,7 @@ class PermissionCheckMiddleware
         if(hasRoutePermission($route)){
             return $next($request);
         }else{
-            if($request->ajax()){
+            if($request->expectsJson()){
                 return response()->json(error_json('你没有权限操作此资源！'));
             }else{
                 return redirect(route('notPermission'));

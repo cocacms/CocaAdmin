@@ -1,13 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/7
- * Time: 21:13
- */
 
 if(!function_exists('captcha_check'))
 {
+    /**
+     * 验证验证码
+     * @param $captcha
+     * @return bool
+     */
     function captcha_check($captcha)
     {
         $_captcha = session('_captcha');
@@ -20,6 +19,11 @@ if(!function_exists('captcha_check'))
 
 if(!function_exists('error_json'))
 {
+    /**
+     * 错误数据格式
+     * @param string $msg
+     * @return array
+     */
     function error_json($msg = '系统发生错误！')
     {
         return [
@@ -32,6 +36,12 @@ if(!function_exists('error_json'))
 
 if(!function_exists('success_json'))
 {
+    /**
+     * 正确数据格式
+     * @param array $data
+     * @param string $msg
+     * @return array
+     */
     function success_json($data = [],$msg = '操作成功！')
     {
         return [
@@ -44,6 +54,10 @@ if(!function_exists('success_json'))
 
 if(!function_exists('get_current_module'))
 {
+    /**
+     * 获取当前访问的模块名
+     * @return mixed
+     */
     function get_current_module()
     {
         $content = app(App\Service\ContentService::class);
@@ -54,6 +68,11 @@ if(!function_exists('get_current_module'))
 
 if(!function_exists('system_config'))
 {
+    /**
+     * 获取系统配置
+     * @param array ...$params
+     * @return mixed
+     */
     function system_config(...$params)
     {
         $content = app(App\Service\ContentService::class);
@@ -64,6 +83,11 @@ if(!function_exists('system_config'))
 
 if(!function_exists('system_content'))
 {
+    /**
+     * 系统上下文参数
+     * @param array ...$params
+     * @return bool
+     */
     function system_content(...$params)
     {
         $content = app(App\Service\ContentService::class);
@@ -77,6 +101,12 @@ if(!function_exists('system_content'))
 }
 if(!function_exists('now'))
 {
+    /**
+     * 时间格式化 默认当前时间
+     * @param null $format
+     * @param null $time
+     * @return false|string
+     */
     function now($format = null,$time = null){
         $time = $time === null ? time() : $time;
         $format = $format === null ? 'Y-m-d H:i:s' : $format;
@@ -84,50 +114,3 @@ if(!function_exists('now'))
     }
 }
 
-if(!function_exists('hasRoutePermission'))
-{
-    function hasRoutePermission($route){
-
-        $allPermissionUri = [];
-
-        if (!$route instanceof \App\Service\Route){
-            $routeCollection = \Illuminate\Support\Facades\Route::getRoutes();
-            $routeName = $route;
-            $route = $routeCollection->getByName($route);
-            if ($route == null){
-                throw new \App\Exceptions\UndefinedRouteException($routeName);
-            }
-        }
-
-        if($route->link !== null){
-            $route = $route->link;
-        }
-
-        $uri = $route->uri();
-        $methods = $route->methods();
-
-        $user = \Illuminate\Support\Facades\Auth::user();
-
-        //无需验证权限的直接放行
-        if ($user && $route->autoPermission){
-            return true;
-        }
-        //超级管理员不验证权限
-        if($user->supper == 1){
-            return true;
-        }
-        //获取用户的全部权限
-        $roles = $user->roles;
-        foreach ($roles as $role) {
-            $permissions = $role->permissions;
-            foreach ($permissions as $permission){
-                $allPermissionUri[] = strtolower($permission->uri.'@'.$permission->method);
-            }
-        };
-        if(in_array(strtolower($uri.'@'.$methods[0]),$allPermissionUri)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-}

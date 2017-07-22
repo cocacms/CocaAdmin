@@ -73,7 +73,7 @@ layui.define(["element","jquery"],function(exports){
 			tabFilter = that.tabConfig.tabFilter;
 		if(_this.attr("target") == "_blank"){
 			window.location.href = _this.attr("data-url");
-		}else if(_this.find("i.iconfont,i.layui-icon").attr("data-icon") != undefined){
+		}else if(_this.find("[data-icon]").attr("data-icon") != undefined){
 			var title = '';
 			//已打开的窗口中不存在
 			if(that.hasTab(_this.find("cite").text()) == -1 && _this.siblings("dl.layui-nav-child").length == 0){
@@ -82,11 +82,12 @@ layui.define(["element","jquery"],function(exports){
 					return;
 				}
 				tabIdIndex++;
-				if(_this.find("i.iconfont").attr("data-icon") != undefined){
-					title += '<i class="iconfont '+_this.find("i.iconfont").attr("data-icon")+'"></i>';
+				console.log(_this.find("[data-icon]").attr("data-icon").indexOf("&#"));
+				if(_this.find("[data-icon]").attr("data-icon").length == 1){
+                    title += '<i class="layui-icon">'+_this.find("[data-icon]").attr("data-icon")+'</i>';
 				}else{
-					title += '<i class="layui-icon">'+_this.find("i.layui-icon").attr("data-icon")+'</i>';
-				}
+                    title += '<i class="'+_this.find("[data-icon]").attr("data-icon")+'"></i>';
+                }
 				title += '<cite>'+_this.find("cite").text()+'</cite>';
 				title += '<i class="layui-icon layui-unselect layui-tab-close" data-id="'+tabIdIndex+'">&#x1006;</i>';
 				element.tabAdd(tabFilter, {
@@ -96,7 +97,7 @@ layui.define(["element","jquery"],function(exports){
 			    })
 				//当前窗口内容
 				var curmenu = {
-					"icon" : _this.find("i.iconfont").attr("data-icon")!=undefined ? _this.find("i.iconfont").attr("data-icon") : _this.find("i.layui-icon").attr("data-icon"),
+					"icon" : _this.find("[data-icon]").attr("data-icon"),
 					"title" : _this.find("cite").text(),
 					"href" : _this.attr("data-url"),
 					"layId" : new Date().getTime()
@@ -109,7 +110,7 @@ layui.define(["element","jquery"],function(exports){
 			}else{
 				//当前窗口内容
 				var curmenu = {
-					"icon" : _this.find("i.iconfont").attr("data-icon")!=undefined ? _this.find("i.iconfont").attr("data-icon") : _this.find("i.layui-icon").attr("data-icon"),
+					"icon" : _this.find("[data-icon]").attr("data-icon"),
 					"title" : _this.find("cite").text(),
 					"href" : _this.attr("data-url")
 				}

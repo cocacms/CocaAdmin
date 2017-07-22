@@ -32,7 +32,7 @@ class MemberController extends Controller
         }
         $member = Member::where([
             ['username','=',$data['username']],
-        ])->first();
+        ])->firstOrFail();
 
         if(is_null($member)){
             return response()->json(error_json('账户不存在！'));
@@ -122,7 +122,7 @@ class MemberController extends Controller
         if (is_null($id)){
             $member = new Member();
         }else{
-            $member = Member::find($id);
+            $member = Member::findOrFail($id);
             $relations = RoleMemberRelation::where('member_id','=',$id)->get();
             foreach ($relations as $relation){
                 foreach ($roles as &$role){
@@ -156,7 +156,7 @@ class MemberController extends Controller
                 }else{
                     unset($input['password']);
                 }
-                $member = Member::find($id);
+                $member = Member::findOrFail($id);
                 $member->update($input);
 
             }

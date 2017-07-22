@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -48,8 +49,12 @@ class Handler extends ExceptionHandler
     {
         $e = $this->prepareException($exception);
 
-        if ($e instanceof NotFoundHttpException) {
-            return redirect(route('notFound'));
+        if ($e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException) {
+            if ($request->expectsJson()){
+                return response()->json(error_json('操作的对象并不存在！'));
+            }else{
+                return redirect(route('notFound'));
+            }
         }
         return parent::render($request, $exception);
     }
@@ -64,7 +69,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return response()->json(error_json('登录超时，请重新登录！'), 401);
         }
         return redirect()->guest(route(empty($exception->guards()) ? '/login' : $exception->guards()[0].'@login'));
     }

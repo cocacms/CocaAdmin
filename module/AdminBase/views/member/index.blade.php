@@ -48,7 +48,7 @@
 
     <script id="table-tpl" type="text/html">
         @{{#  layui.each(d, function(index, item){ }}
-        <li>
+        <tr>
             <td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
             <td align="left">@{{ item.id }}</td>
             <td>@{{ item.username }}</td>
@@ -65,11 +65,8 @@
                 <a class="layui-btn layui-btn-danger layui-btn-mini del_btn" data-id="@{{ item.id }}" data-url="{{route('member@del')}}"><i class="layui-icon">&#xe640;</i> 删除</a>
                 @endcanshow
             </td>
-        </li>
-
-        <tr>
-
         </tr>
+
         @{{#  }); }}
 
         @{{#  if(d.length === 0){ }}
