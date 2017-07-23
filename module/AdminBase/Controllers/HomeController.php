@@ -55,7 +55,7 @@ class HomeController extends Controller
         }
         $permissions = array_unique($permissions);
 
-        $menu = $this->handlerMenu($menu,$permissions);
+        $menu = $this->handleMenu($menu,$permissions);
         return response()->json($menu);
     }
 
@@ -65,7 +65,7 @@ class HomeController extends Controller
      * @param $permissions
      * @return array
      */
-    private function handlerMenu($menu,$permissions){
+    private function handleMenu($menu,$permissions){
         foreach ($menu as $index => &$item){
             if(stripos($item['href'],'route[') !== false){
                 $routerName = str_ireplace(['route[',']'],[''],$item['href']);
@@ -87,7 +87,7 @@ class HomeController extends Controller
 
             }
             if(isset($item['children']) && count($item['children']) > 0){
-                $item['children'] = $this->handlerMenu($item['children'],$permissions);
+                $item['children'] = $this->handleMenu($item['children'],$permissions);
                 if (empty($item['children']))
                     array_splice($menu,$index,1);
             }

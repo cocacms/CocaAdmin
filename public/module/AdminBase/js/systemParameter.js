@@ -7,7 +7,7 @@ layui.config({
     layui.upload({
         url : "../../upload?name=webLogoFile",
         success: function(res){
-            if(res.code == 1){
+            if(res.code == 0){
                 $('#webLogoImg').attr('src','../../'+res.data);
                 $('[name=weblogo]').val(res.data);
             }
@@ -24,9 +24,9 @@ layui.config({
             success:function (data) {
                 layer.close(index);
                 if(data.code == 0){
-                    layer.alert(data.msg, {icon: 2});
-                }else{
                     layer.msg("系统基本参数修改成功！");
+                }else{
+                    layer.alert(data.msg, {icon: 2});
                 }
             }
         });

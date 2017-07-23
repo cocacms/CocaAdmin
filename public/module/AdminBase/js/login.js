@@ -24,6 +24,8 @@ layui.config({
 			data:data.field,
 			success:function (data) {
 				if(data.code == 0){
+                    location.href = '../admin'
+				}else{
                     tips(data.msg, '.login_btn', {
                         tips: [1, 'red'],
                         time: 1500
@@ -33,8 +35,6 @@ layui.config({
                     if(data.msg == '账户密码有误！'){
                         $('[name=password]').val('');
                     }
-				}else{
-					location.href = '../admin'
 				}
             }
 		});

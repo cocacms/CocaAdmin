@@ -15,7 +15,7 @@ layui.config({
             data:data.field,
             success:function (data) {
                 top.layer.close(index);
-                if(data.code == 1){
+                if(data.code == 0){
                     top.layer.msg("操作成功！");
                     layer.closeAll("iframe");
                 }else{

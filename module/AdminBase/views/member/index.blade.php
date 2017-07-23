@@ -52,16 +52,16 @@
             <td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
             <td align="left">@{{ item.id }}</td>
             <td>@{{ item.username }}</td>
-            <td><img class="layui-circle" width="50px" src="@{{ item.avatar }}"></td>
+            <td><img class="layui-circle" width="50px" height="50px" src="@{{ item.avatar }}"></td>
             <td>@{{ item.sex }}</td>
             <td>@{{ item.tel }}</td>
             <td>@{{ item.mail }}</td>
             <td>@{{ item.nickname }}</td>
             <td>
-                @canshow(role@edit)
+                @canshow(member@edit)
                 <a class="layui-btn layui-btn-mini edit_btn" data-id="@{{ item.id }}" data-url="{{route('member@edit')}}"><i class="iconfont icon-edit"></i> 编辑</a>
                 @endcanshow
-                @canshow(role@del)
+                @canshow(member@del)
                 <a class="layui-btn layui-btn-danger layui-btn-mini del_btn" data-id="@{{ item.id }}" data-url="{{route('member@del')}}"><i class="layui-icon">&#xe640;</i> 删除</a>
                 @endcanshow
             </td>

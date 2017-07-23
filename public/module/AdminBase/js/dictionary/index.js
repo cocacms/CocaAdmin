@@ -33,16 +33,19 @@ layui.config({
     $(".add_btn").click(function(){
         var url = $(this).data('url');
         var index = layui.layer.open({
-            title : "添加角色",
+            title : "添加数据字典",
             type : 2,
             content : url,
-            area: ['470px', '750px'],
             success : function(layero, index){
             },
             end:function () {
                 loadData(currentPage);
             }
         });
+        $(window).resize(function(){
+            layui.layer.full(index);
+        });
+        layui.layer.full(index);
     });
 
     //批量删除
@@ -104,10 +107,9 @@ layui.config({
         var url = $(this).data('url');
         var id = $(this).data('id');
         var index = layui.layer.open({
-            title : "编辑角色",
+            title : "编辑数据字典",
             type : 2,
             content : url +"/"+id,
-            area: ['470px', '750px'],
             success : function(layero, index){
             },
             end:function () {
@@ -115,10 +117,10 @@ layui.config({
             }
         });
         //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
-        // $(window).resize(function(){
-        //     layui.layer.full(index);
-        // });
-        // layui.layer.full(index);
+        $(window).resize(function(){
+            layui.layer.full(index);
+        });
+        layui.layer.full(index);
     });
 
     //删除操作

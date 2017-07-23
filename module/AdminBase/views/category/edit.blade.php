@@ -48,5 +48,5 @@
 @endsection
 
 @section('jsImport')
-    @jsimport(category/add)
+    @jsimport(category/edit)
 @endsection

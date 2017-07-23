@@ -69,5 +69,15 @@ return [
             "spread" => false
         ],
 
+    ],
+    'temp'=>[
+        'layui' => // 模板使用数组 或者 文字{"code": ${code},"msg": "${msg}","data": {"src": "${data}"}}
+            [
+                'code'=> '${code}',
+                'msg' => '${msg}',
+                'data' => [
+                    'src' => '${data}'
+                ]
+            ]
     ]
 ];

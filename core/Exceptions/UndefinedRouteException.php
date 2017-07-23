@@ -10,7 +10,6 @@
 namespace App\Exceptions;
 
 use Exception;
-use Throwable;
 
 class UndefinedRouteException extends Exception
 {

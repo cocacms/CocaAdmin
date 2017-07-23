@@ -12,9 +12,9 @@ layui.config({
         loadProvince(); //加载省信息
 
     layui.upload({
-    	url : "../../upload?name=userFace",
+    	url : window.uploadUrl + "?name=userFace",
     	success: function(res){
-    	    if(res.code == 1){
+    	    if(res.code == 0){
     	        $('#userFace').attr('src','../../'+res.data);
                 $('[name=avatar]').val(res.data);
             }
@@ -48,9 +48,9 @@ layui.config({
             success:function (data) {
                 layer.close(index);
                 if(data.code == 0){
-                    layer.alert(data.msg, {icon: 2});
-                }else{
                     layer.msg("修改成功！");
+                }else{
+                    layer.alert(data.msg, {icon: 2});
                 }
             }
         });
@@ -68,9 +68,9 @@ layui.config({
             success:function (data) {
                 layer.close(index);
                 if(data.code == 0){
-                    layer.alert(data.msg, {icon: 2});
-                }else{
                     layer.msg("密码修改成功！");
+                }else{
+                    layer.alert(data.msg, {icon: 2});
                 }
             }
         });

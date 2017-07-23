@@ -95,8 +95,8 @@
 							<cite>{{$_member->nickname or $_member->username}}</cite>
 						</a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:;" data-url="{{route('changeInfo')}}"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
-							<dd><a href="javascript:;" data-url="{{route('changePassword')}}"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+							<dd><a href="javascript:;" data-url="{{route('changeInfo')}}"><i class="iconfont icon-zhanghu" data-icon="iconfont icon-zhanghu"></i><cite>个人资料</cite></a></dd>
+							<dd><a href="javascript:;" data-url="{{route('changePassword')}}"><i class="iconfont icon-shezhi1" data-icon="iconfont icon-shezhi1"></i><cite>修改密码</cite></a></dd>
 							<dd><a href="javascript:;" class="changeSkin"><i class="iconfont icon-huanfu"></i><cite>更换皮肤</cite></a></dd>
 							<dd><a href="{{route('logout')}}"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
 						</dl>
@@ -105,7 +105,7 @@
 			</div>
 		</div>
 		<!-- 左侧导航 -->
-		<div class="layui-side layui-bg-black">
+		<div class="layui-side layui-bg-black" id="menu" data-url="{{route('menu')}}">
 			<!--
 			<div class="user-photo">
 				<a class="img" title="我的头像" ><img src="images/face.jpg"></a>
@@ -148,7 +148,8 @@
 
 	<script type="text/javascript" src="{{ asset('/layui/layui.js') }}"></script>
 	<script type="text/javascript" src="{{config('icon.js')}}"></script>
-	<script type="text/javascript" src="{{ asset('/module/AdminBase/js/leftNav.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/module/AdminBase/js/index.js') }}"></script>
+
+	@jsimport(leftNav)
+	@jsimport(index)
 </body>
 </html>

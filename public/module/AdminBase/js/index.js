@@ -6,9 +6,10 @@ layui.config({
 		layer = layui.layer,
 		element = layui.element();
 		$ = layui.jquery;
+		var menuUrl = $('#menu').data('url');
 		tab = layui.bodyTab({
 			openTabNum : "50",  //最大可打开窗口数量
-			url : "../../admin/menu" //获取菜单json地址
+			url : menuUrl //获取菜单json地址
 		});
 
 	//更换皮肤

@@ -9,7 +9,7 @@ layui.config({
     layui.upload({
         url : window.uploadUrl+'?name=userFace',
         success: function(res){
-            if(res.code == 1){
+            if(res.code == 0){
                 $('#userFace').attr('src',window.baseUrl+res.data);
                 $('[name=avatar]').val(res.data);
             }else{
@@ -28,7 +28,7 @@ layui.config({
             data:data.field,
             success:function (data) {
                 top.layer.close(index);
-                if(data.code == 1){
+                if(data.code == 0){
                     top.layer.msg("操作成功！");
                     layer.closeAll("iframe");
                 }else{

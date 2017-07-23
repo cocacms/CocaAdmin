@@ -19,17 +19,20 @@ if(!function_exists('captcha_check'))
 
 if(!function_exists('error_json'))
 {
+
     /**
-     * 错误数据格式
+     * 错误数据通用格式
      * @param string $msg
+     * @param int $code
+     * @param array $data
      * @return array
      */
-    function error_json($msg = '系统发生错误！')
+    function error_json($msg = '系统发生错误！', $code = 1, $data = [])
     {
         return [
-            'code' => 0,
+            'code' => $code,
             'msg' => $msg,
-            'data' =>[]
+            'data' =>$data
         ];
     }
 }
@@ -37,15 +40,16 @@ if(!function_exists('error_json'))
 if(!function_exists('success_json'))
 {
     /**
-     * 正确数据格式
+     * 正确数据通用格式
      * @param array $data
+     * @param int $code
      * @param string $msg
      * @return array
      */
-    function success_json($data = [],$msg = '操作成功！')
+    function success_json($data = [], $code = 0, $msg = '操作成功！')
     {
         return [
-            'code' => 1,
+            'code' => $code,
             'msg' => $msg,
             'data' =>$data
         ];
@@ -114,3 +118,56 @@ if(!function_exists('now'))
     }
 }
 
+if(!function_exists('module_config')){
+    /**
+     * 获取模块配置
+     * @param $module
+     * @param $name
+     * @return null
+     */
+    function module_config($module, $name){
+        $name = '[\''.$module.'\'][\''.str_replace('.','\'][\'',$name).'\']';
+        $content = (array)system_content('_modules');
+        $value=null;
+        eval('if(isset($content'.$name.')){$value=$content'.$name.';}else{$value=null;}');
+        return $value;
+    }
+}
+
+if(!function_exists('module_temp_json')){
+    /**
+     * 编译模块配置文字/数组模板
+     * @param $module
+     * @param $name
+     * @param $params
+     * @return mixed|null
+     */
+    function module_temp_json($module, $name, $params){
+
+        function handlerArray ($temp,$params){
+            foreach ($temp as $k => $v){
+                if(is_array($v)){
+                    $temp[$k] = handlerArray($v,$params);
+                }else{
+                    $temp[$k] = preg_replace_callback('/^\$\{([^\}]+)\}$/', function($matches)use ($params){
+                        return (string)$params[$matches[1]];
+                    }, $v);
+                }
+            }
+            return $temp;
+        };
+        $temp = module_config($module,"temp.$name");
+        if (is_null($temp)) return null;
+        if(is_string($temp)){
+            return preg_replace_callback('/\$\{([^\}]+)\}/', function($matches)use ($params){
+                return (string)$params[$matches[1]];
+            }, $temp);
+        }
+
+        if (is_array($temp)){
+            return handlerArray($temp,$params);
+        }
+        return null;
+    }
+
+}

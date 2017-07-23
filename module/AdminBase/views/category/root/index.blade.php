@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <blockquote class="layui-elem-quote layui-form" lay-filter='chooseRoot' data-id="">
-        @canshow(category@postAdd)
+        @canshow(category@rootAdd)
         <div class="layui-inline">
             <a class="layui-btn add_btn" data-id=""  style="background-color:#5FB878" data-url="{{route('category@rootAdd')}}">添加分类域</a>
         </div>
@@ -43,10 +43,10 @@
             <td>-</td>
             @{{# } }}
             <td>
-                @canshow(category@postEdit)
+                @canshow(category@rootEdit)
                 <a class="layui-btn layui-btn-mini edit_btn" data-id="@{{ item.id }}" data-url="{{route('category@rootEdit',['id'=>''])}}"><i class="iconfont icon-edit"></i> 编辑</a>
                 @endcanshow
-                @canshow(category@del)
+                @canshow(category@rootDel)
                 <a class="layui-btn layui-btn-danger layui-btn-mini del_btn" data-id="@{{ item.id }}" data-url="{{route('category@rootDel',['id'=>''])}}"><i class="layui-icon">&#xe640;</i> 删除</a>
                 @endcanshow
             </td>

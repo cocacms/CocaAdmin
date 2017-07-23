@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Mockery\Exception;
 
 class DefinedServiceProvider extends ServiceProvider
 {
@@ -48,11 +50,26 @@ class DefinedServiceProvider extends ServiceProvider
         //上传模块
         Route::post('/upload',function(Request $request){
             $name = $request->input('name','file');
+            $tempName = $request->input('temp',null);
+            $moduleName = $request->input('module',null);
             $file = $request->file($name,null);
-            if(is_null($file))
-                return response()->json(error_json('没有获取到上传的文件！'));
-            $path = $file->store('uploads','public');
-            return response()->json(success_json('storage/'.$path));
+            try{
+                if(is_null($file)){
+                    $result = error_json('没有获取到上传的文件！',1,'');
+                }else{
+                    $path = $file->store('uploads','public');
+                    $result = success_json(Storage::url($path));
+                }
+            }catch (\Exception $e){
+                $result = error_json($e->getMessage(),1,'');
+            }
+
+            if(!is_null($tempName) && !is_null($moduleName)){
+                $temp = module_temp_json($moduleName,$tempName,$result);
+                if($temp !== null) $result = is_string($temp) ? json_decode($temp,true) : $temp;
+            }
+            return response()->json($result);
+
         })->name('webUpload');
 
         Route::get('/notFound',function (){

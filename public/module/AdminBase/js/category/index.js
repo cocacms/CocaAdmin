@@ -16,7 +16,7 @@ layui.config({
             type : "get",
             dataType : "json",
             success : function(data){
-                if(data.code == 1){
+                if(data.code == 0){
                     //执行加载数据的方法
                     list(data.data);
                 }
@@ -121,7 +121,7 @@ layui.config({
                 url : url + '/' +id,
                 type: 'DELETE',
                 success:function (data) {
-                    if(data.code == 1){
+                    if(data.code == 0){
                         loadData(current_root);
                         layer.msg("删除成功！");
                     }else{
@@ -144,7 +144,7 @@ layui.config({
             type: 'POST',
             success:function (data) {
                 layer.close(index);
-                if(data.code == 1){
+                if(data.code == 0){
                     loadData(current_root);
                 }else{
                     layer.alert(data.msg, {icon: 2});

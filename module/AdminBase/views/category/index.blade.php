@@ -87,10 +87,10 @@
                 @canshow(category@moveDown)
                 <a class="layui-btn layui-btn-mini layui-btn-warm move_btn @{{ index == cannotMoveTag.down[item.depth] || (index < d.length - 1 && item.depth-1 == d[index+1].depth)? 'layui-btn-disabled' : '' }}" data-id="@{{ item.id }}" data-url="{{route('category@moveDown',['id'=>''])}}"><i class="coca-icon coca-icon-movedown"></i></a>
                 @endcanshow
-                @canshow(category@postAdd)
+                @canshow(category@add)
                 <a class="layui-btn layui-btn-mini add_btn" data-id="@{{ item.id }}" data-url="{{route('category@add',['id'=>''])}}"><i class="layui-icon">&#xe654;</i> 添加子分类</a>
                 @endcanshow
-                @canshow(category@postEdit)
+                @canshow(category@edit)
                 <a class="layui-btn layui-btn-mini edit_btn" data-id="@{{ item.id }}" data-url="{{route('category@edit',['id'=>''])}}"><i class="iconfont icon-edit"></i> 编辑</a>
                 @endcanshow
                 @canshow(category@del)

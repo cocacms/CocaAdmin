@@ -3,7 +3,7 @@ Route::group(['middleware'=>'web'],function(){
     Route::group(['middleware'=>'coca-admin-check'],function (){
 
         Route::get('/', 'HomeController@index')->autoPermission();
-        Route::get('/menu', 'HomeController@menu')->autoPermission();
+        Route::get('/menu', 'HomeController@menu')->name('menu')->autoPermission();
         Route::get('/home', 'HomeController@home')->name('home')->autoPermission();
 
         Route::group(['prefix'=>'user'],function (){
@@ -89,9 +89,9 @@ Route::group(['middleware'=>'web'],function(){
             Route::post('/edit/{id}','DictionaryController@postEdit')->name('dictionary@postEdit')->permissionName('编辑字典');
             Route::get('/edit/{id}','DictionaryController@edit')->name('dictionary@edit')->link('dictionary@postEdit');
 
-            Route::delete('/{id}','DictionaryController@del')->name('dictionary@del')->permissionName('删除字典');
+            Route::delete('/','DictionaryController@del')->name('dictionary@del')->permissionName('删除字典');
 
-        },'字典管理');
+        },'数据字典管理');
     });
 
     Route::get('/login','MemberController@login')->name('admin@login');
