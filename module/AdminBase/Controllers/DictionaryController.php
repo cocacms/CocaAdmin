@@ -7,6 +7,12 @@
  * QQ Group:   647229346
  */
 
-return [
-    Module\AdminBase\Providers\ModuleProvider::class,
-];
+namespace Module\AdminBase\Controllers;
+
+
+use App\Http\Controllers\Controller;
+
+class DictionaryController extends Controller
+{
+
+}

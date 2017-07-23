@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/12
- * Time: 13:48
+ * Coca-Admin is a general modular web framework developed based on Laravel 5.4 .
+ * Author:     Rojer
+ * Mail:       rojerchen@qq.com
+ * Git:        https://github.com/rojer95/CocaAdmin
+ * QQ Group:   647229346
  */
 
 namespace Module\AdminBase\Middlewares;

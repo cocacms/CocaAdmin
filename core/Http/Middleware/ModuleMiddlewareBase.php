@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Middleware;
 /**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/6
- * Time: 20:34
+ * Coca-Admin is a general modular web framework developed based on Laravel 5.4 .
+ * Author:     Rojer
+ * Mail:       rojerchen@qq.com
+ * Git:        https://github.com/rojer95/CocaAdmin
+ * QQ Group:   647229346
  */
 trait ModuleMiddlewareBase
 {

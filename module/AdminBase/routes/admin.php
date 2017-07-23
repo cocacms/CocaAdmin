@@ -77,6 +77,21 @@ Route::group(['middleware'=>'web'],function(){
 
 
         },'分类管理');
+
+
+        Route::group(['prefix'=>'dictionary'],function (){
+            Route::get('/list','DictionaryController@_list')->name('dictionary@list')->permissionName('获取字典列表');
+            Route::get('/','DictionaryController@index')->name('dictionary@index')->link('dictionary@list');
+
+            Route::post('/','DictionaryController@postAdd')->name('dictionary@postAdd')->permissionName('创建字典');
+            Route::get('/addPage','DictionaryController@add')->name('dictionary@add')->link('dictionary@postAdd'); //id =》 分类域id
+
+            Route::post('/edit/{id}','DictionaryController@postEdit')->name('dictionary@postEdit')->permissionName('编辑字典');
+            Route::get('/edit/{id}','DictionaryController@edit')->name('dictionary@edit')->link('dictionary@postEdit');
+
+            Route::delete('/{id}','DictionaryController@del')->name('dictionary@del')->permissionName('删除字典');
+
+        },'字典管理');
     });
 
     Route::get('/login','MemberController@login')->name('admin@login');

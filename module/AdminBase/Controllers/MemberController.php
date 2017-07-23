@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/7
- * Time: 13:54
+ * Coca-Admin is a general modular web framework developed based on Laravel 5.4 .
+ * Author:     Rojer
+ * Mail:       rojerchen@qq.com
+ * Git:        https://github.com/rojer95/CocaAdmin
+ * QQ Group:   647229346
  */
 
 namespace Module\AdminBase\Controllers;
@@ -21,10 +22,19 @@ use Module\AdminBase\Models\RoleMemberRelation;
 
 class MemberController extends Controller
 {
+    /**
+     * 登录页面
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function login(){
         return $this->view('login');
     }
 
+    /**
+     * 登录
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function postLogin(Request $request){
         $data = $request->all();
         if(!captcha_check($data['code'])){
@@ -45,14 +55,27 @@ class MemberController extends Controller
         return response()->json(success_json());
     }
 
+    /**
+     * 修改信息页面
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function changeInfo(){
         return $this->view('member.changeInfo');
     }
 
+    /**
+     * 修改密码页面
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function changePassword(){
         return $this->view('member.changePassword');
     }
 
+    /**
+     * 修改用户数据
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function submitInfo(Request $request){
         $data = $request->all();
         $member = Auth::user();
@@ -69,6 +92,11 @@ class MemberController extends Controller
         }
     }
 
+    /**
+     * 修改密码
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function submitPassword(Request $request){
         $data = $request->all();
         $member = Auth::user();
@@ -84,16 +112,34 @@ class MemberController extends Controller
         }
     }
 
+    /**
+     * 登出
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function logout(){
         Auth::logout();
         return redirect(route('admin@login'));
     }
 
 
+    /**
+     * 以下是管理员账户管理的控制器
+     */
+
+
+    /**
+     * 管理员管理页面
+     * @param Request $request
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function index(Request $request){
         return $this->view('member.index');
     }
 
+    /**
+     * 获取管理员列表数据
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function _list(){
         $data = Member::paginate(20);
         $data = $data->toArray();
@@ -114,6 +160,11 @@ class MemberController extends Controller
         return response()->json(success_json($data));
     }
 
+    /**
+     * 修改添加管理员页面
+     * @param null $id
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function edit($id = null){
         $roles = Role::all()->toArray();
         foreach ($roles as &$role){
@@ -139,6 +190,12 @@ class MemberController extends Controller
         ]);
     }
 
+    /**
+     * 修改添加管理员
+     * @param Request $request
+     * @param null $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function submit(Request $request,$id = null){
         $input = $request->only('username','password','avatar','nickname','sex','tel','birthday','mail');
         $roles = array_keys($request->input('role',[]));
@@ -169,7 +226,7 @@ class MemberController extends Controller
                     'role_id'=>$role
                 ];
             }
-            DB::table('role_member_relations')->insert($data);
+            RoleMemberRelation::insert($data);
         }catch (\Exception $e){
             DB::rollBack();
             switch ($e->getCode()){
@@ -184,6 +241,11 @@ class MemberController extends Controller
         return response()->json(success_json());
     }
 
+    /**
+     * 删除管理员
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function del(Request $request){
         $data = $request->input('ids',array());
         DB::beginTransaction();

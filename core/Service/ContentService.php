@@ -3,10 +3,11 @@ namespace App\Service;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/8
- * Time: 14:14
+ * Coca-Admin is a general modular web framework developed based on Laravel 5.4 .
+ * Author:     Rojer
+ * Mail:       rojerchen@qq.com
+ * Git:        https://github.com/rojer95/CocaAdmin
+ * QQ Group:   647229346
  */
 class ContentService
 {

@@ -19,7 +19,7 @@ class ModuleCreate extends Command
      *
      * @var string
      */
-    protected $description = '创建一个模块';
+    protected $description = 'create a module';
 
 
     /**

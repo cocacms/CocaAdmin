@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/10
- * Time: 10:44
+ * Coca-Admin is a general modular web framework developed based on Laravel 5.4 .
+ * Author:     Rojer
+ * Mail:       rojerchen@qq.com
+ * Git:        https://github.com/rojer95/CocaAdmin
+ * QQ Group:   647229346
  */
 
 namespace Module\AdminBase\Controllers;
@@ -15,9 +16,19 @@ use Illuminate\Http\Request;
 
 class SystemController extends Controller
 {
+    /**
+     * 修改系统配置页面
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function config(){
         return $this->view('system.config');
     }
+
+    /**
+     * 提交修改系统设置数据
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function submitConfig(Request $request){
         $data = $request->all();

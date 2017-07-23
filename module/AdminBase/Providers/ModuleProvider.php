@@ -4,10 +4,11 @@ use Illuminate\Support\ServiceProvider;
 use Module\AdminBase\Providers\Components\Hello;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 /**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/5
- * Time: 12:26
+ * Coca-Admin is a general modular web framework developed based on Laravel 5.4 .
+ * Author:     Rojer
+ * Mail:       rojerchen@qq.com
+ * Git:        https://github.com/rojer95/CocaAdmin
+ * QQ Group:   647229346
  */
 class ModuleProvider extends ServiceProvider
 {

@@ -62,5 +62,12 @@ return [
             ]
         ],
 
+        [
+            "title" => "数据字典",
+            "icon" => "coca-icon coca-icon-tubiao17",
+            "href" => 'route[dictionary@index]',
+            "spread" => false
+        ],
+
     ]
 ];

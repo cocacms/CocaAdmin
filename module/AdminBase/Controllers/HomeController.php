@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: win
- * Date: 2017/7/8
- * Time: 12:07
+ * Coca-Admin is a general modular web framework developed based on Laravel 5.4 .
+ * Author:     Rojer
+ * Mail:       rojerchen@qq.com
+ * Git:        https://github.com/rojer95/CocaAdmin
+ * QQ Group:   647229346
  */
 
 namespace Module\AdminBase\Controllers;
@@ -15,15 +16,27 @@ use Illuminate\Support\Facades\Route;
 
 class HomeController extends Controller
 {
+    /**
+     *  后台框架
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function index()
     {
         return $this->view('index');
     }
 
+    /**
+     * 首页页面
+     * @return \Illuminate\Foundation\Application|mixed
+     */
     public function home(){
         return $this->view('home');
     }
 
+    /**
+     * 菜单数据
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function menu()
     {
         $menu = system_content('system_menu');
@@ -46,6 +59,12 @@ class HomeController extends Controller
         return response()->json($menu);
     }
 
+    /**
+     * 根据权限过滤菜单展示
+     * @param $menu
+     * @param $permissions
+     * @return array
+     */
     private function handlerMenu($menu,$permissions){
         foreach ($menu as $index => &$item){
             if(stripos($item['href'],'route[') !== false){
