@@ -111,6 +111,24 @@ Route::group(['middleware'=>'web'],function(){
 
 
         },'宣传滚动栏管理');
+
+
+        Route::group(['prefix'=>'ad'],function (){
+            Route::get('/list','AdController@_list')->name('ad@list')->permissionName('获取广告列表');
+            Route::get('/','AdController@index')->name('ad@index')->link('ad@list');
+
+            Route::post('/','AdController@postAdd')->name('ad@postAdd')->permissionName('创建广告');
+            Route::get('/addPage','AdController@add')->name('ad@add')->link('ad@postAdd');
+
+            Route::post('/edit/{id}','AdController@postEdit')->name('ad@postEdit')->permissionName('编辑广告');
+            Route::get('/edit/{id}','AdController@edit')->name('ad@edit')->link('ad@postEdit');
+
+            Route::delete('/','AdController@del')->name('ad@del')->permissionName('删除广告');
+
+            Route::post('/show','AdController@changeShow')->name('ad@changeShow')->permissionName('修改广告显示隐藏');
+
+        },'广告管理');
+
     });
 
     Route::get('/login','MemberController@login')->name('admin@login');

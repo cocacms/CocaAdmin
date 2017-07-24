@@ -1,11 +1,31 @@
 var $;
 layui.config({
-}).use(['form','layer','jquery'],function(){
+}).use(['form','layer','jquery','upload','layedit'],function(){
     var form = layui.form(),
         layer = parent.layer === undefined ? layui.layer : parent.layer,
-        $ = layui.jquery;
+        $ = layui.jquery,
+        layedit = layui.layedit;
+
+    var editor =layedit.build('content',{
+        uploadImage:{
+            url : window.uploadUrl + "?name=file&temp=layui&module=AdminBase"
+        }
+    });
+
+    layui.upload({
+        url : window.uploadUrl+'?name=file',
+        success: function(res){
+            if(res.code == 0){
+                $('#file').attr('src',window.baseUrl+res.data);
+                $('[name=pic]').val(res.data);
+            }else{
+                layer.alert(data.msg, {icon: 2});
+            }
+        }
+    });
 
     form.on("submit(submit)",function(data){
+        data.field.content = layedit.getContent(editor);
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
         var url = $(this).data('url');
         $.ajax({

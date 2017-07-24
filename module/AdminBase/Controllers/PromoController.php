@@ -67,6 +67,11 @@ class PromoController extends Controller
         return $this->view('promo.add',['category'=>$category]);
     }
 
+    /**
+     * 添加数据
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function postAdd(Request $request)
     {
         return $this->submit(null,$request);
@@ -121,7 +126,7 @@ class PromoController extends Controller
      */
     private function submit($id =  null, Request $request)
     {
-        $data = $request->only('tag','name','url','target','pic','description','content','show','order');
+        $data = $request->only('tag','name','link','target','pic','description','content','show','order');
         if (is_null($data['description']) && !is_null($data['content'])){
             $data['description'] = str_limit(strip_tags($data['content']),50);
         }
@@ -159,6 +164,11 @@ class PromoController extends Controller
         return response()->json(success_json());
     }
 
+    /**
+     * 修改顺序
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function changeOrder(Request $request)
     {
         $id = $request->input('id');
@@ -173,6 +183,11 @@ class PromoController extends Controller
         return response()->json(success_json());
     }
 
+    /**
+     * 修改显示隐藏
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function changeShow(Request $request)
     {
         $id = $request->input('id');

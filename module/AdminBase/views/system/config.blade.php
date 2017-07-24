@@ -55,6 +55,13 @@
             <td><input name="record" type="text" class="layui-input record" value="{{system_config('record')}}" placeholder="请输入网站备案号"></td>
             <td>record</td>
         </tr>
+
+        <tr>
+            <td>统计代码</td>
+            <td><textarea name="statscode" placeholder="请输入统计代码" class="layui-textarea description">{{system_config('statscode')}}</textarea></td>
+            <td>statscode</td>
+        </tr>
+
         </tbody>
     </table>
     <div class="layui-form-item" style="text-align: right;">

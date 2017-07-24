@@ -76,6 +76,13 @@ return [
             "spread" => false
         ],
 
+        [
+            "title" => "广告管理",
+            "icon" => "coca-icon coca-icon-guanggao1",
+            "href" => 'route[ad@index]',
+            "spread" => false
+        ],
+
     ],
     'temp'=>[
         'layui' => // 模板使用数组 或者 文字{"code": ${code},"msg": "${msg}","data": {"src": "${data}"}}
