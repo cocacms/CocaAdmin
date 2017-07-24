@@ -84,7 +84,7 @@ Route::group(['middleware'=>'web'],function(){
             Route::get('/','DictionaryController@index')->name('dictionary@index')->link('dictionary@list');
 
             Route::post('/','DictionaryController@postAdd')->name('dictionary@postAdd')->permissionName('创建字典');
-            Route::get('/addPage','DictionaryController@add')->name('dictionary@add')->link('dictionary@postAdd'); //id =》 分类域id
+            Route::get('/addPage','DictionaryController@add')->name('dictionary@add')->link('dictionary@postAdd');
 
             Route::post('/edit/{id}','DictionaryController@postEdit')->name('dictionary@postEdit')->permissionName('编辑字典');
             Route::get('/edit/{id}','DictionaryController@edit')->name('dictionary@edit')->link('dictionary@postEdit');
@@ -92,6 +92,25 @@ Route::group(['middleware'=>'web'],function(){
             Route::delete('/','DictionaryController@del')->name('dictionary@del')->permissionName('删除字典');
 
         },'数据字典管理');
+
+
+        Route::group(['prefix'=>'promo'],function (){
+            Route::get('/list','PromoController@_list')->name('promo@list')->permissionName('获取宣传滚动栏列表');
+            Route::get('/','PromoController@index')->name('promo@index')->link('dictionary@list');
+
+            Route::post('/','PromoController@postAdd')->name('promo@postAdd')->permissionName('创建宣传滚动栏');
+            Route::get('/addPage','PromoController@add')->name('promo@add')->link('dictionary@postAdd');
+
+            Route::post('/edit/{id}','PromoController@postEdit')->name('promo@postEdit')->permissionName('编辑宣传滚动栏');
+            Route::get('/edit/{id}','PromoController@edit')->name('promo@edit')->link('dictionary@postEdit');
+
+            Route::delete('/','PromoController@del')->name('promo@del')->permissionName('删除宣传滚动栏');
+
+            Route::post('/order','PromoController@changeOrder')->name('promo@changeOrder')->permissionName('修改宣传滚动栏顺序');
+            Route::post('/show','PromoController@changeShow')->name('promo@changeShow')->permissionName('修改宣传滚动栏显示隐藏');
+
+
+        },'宣传滚动栏管理');
     });
 
     Route::get('/login','MemberController@login')->name('admin@login');

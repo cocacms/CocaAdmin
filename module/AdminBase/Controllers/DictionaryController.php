@@ -27,6 +27,26 @@ class DictionaryController extends Controller
     }
 
     /**
+     * 获取数据字典列表数据
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function _list()
+    {
+        $data = Dictionary::paginate($this->pageSize)->toArray();
+        $data['data'] = collect($data['data'])->map(function ($item){
+            $item['content'] = '';
+            if (is_null($item['description'])){
+                $item['description'] = '-';
+            }else{
+                $item['description'] = str_limit(strip_tags(base64_decode($item['description'])),80);
+            }
+            return $item;
+        });
+
+        return response()->json(success_json($data));
+    }
+
+    /**
      * 数据字典修改提交
      * @param null $id
      * @param Request $request
@@ -40,8 +60,12 @@ class DictionaryController extends Controller
             $dictionary = Dictionary::findOrFail($id);
         }
         $input = $request->only('name','tag','description');
-        $input['content'] = $request->input('content',[]);
-        $input['content'] = serialize(array_values($input['content']));
+        $input['content'] = array_values($request->input('content',[]));
+        $content = [];
+        foreach ($input['content'] as $contentItem){
+            $content[$contentItem['k']] = $contentItem['v'];
+        }
+        $input['content'] = serialize($content);
         $dictionary->name = $input['name'];
         $dictionary->tag = $input['tag'];
         $dictionary->description = base64_encode($input['description']);
@@ -62,25 +86,7 @@ class DictionaryController extends Controller
         return response()->json(error_json());
     }
 
-    /**
-     * 获取数据字典列表数据
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function _list()
-    {
-        $data = Dictionary::paginate(20)->toArray();
-        $data['data'] = collect($data['data'])->map(function ($item){
-            $item['content'] = '';
-            if (is_null($item['description'])){
-                $item['description'] = '-';
-            }else{
-                $item['description'] = str_limit(strip_tags(base64_decode($item['description'])),80);
-            }
-            return $item;
-        });
 
-        return response()->json(success_json($data));
-    }
 
     /**
      * 添加数据字典的页面
@@ -109,7 +115,15 @@ class DictionaryController extends Controller
     public function edit($id)
     {
         $dictionary = Dictionary::findOrFail($id);
-        $dictionary->content = unserialize($dictionary->content);
+        $content = unserialize($dictionary->content);
+        $newContent = [];
+        foreach ($content as $k => $v){
+            $newContent[] = [
+                'k'=>$k,
+                'v'=>$v
+            ];
+        }
+        $dictionary->content = $newContent;
         $dictionary->description = $dictionary->description == null ? '' : base64_decode($dictionary->description);
         return $this->view('dictionary.edit',['dictionary'=>$dictionary]);
     }

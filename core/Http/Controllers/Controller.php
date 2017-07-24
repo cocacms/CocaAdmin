@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
 {
+    protected $pageSize = 20;
     protected $content = null;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function __construct()
@@ -24,7 +25,7 @@ class Controller extends BaseController
             $content = app(ContentService::class);
             $content->set('currentModule',$classNames[1]);
         }
-
+        $this->pageSize = request()->input('pageSize',20);
     }
 
     protected function view($view = null, $data = [], $mergeData = []){

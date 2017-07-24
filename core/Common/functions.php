@@ -126,11 +126,9 @@ if(!function_exists('module_config')){
      * @return null
      */
     function module_config($module, $name){
-        $name = '[\''.$module.'\'][\''.str_replace('.','\'][\'',$name).'\']';
+        $name = "$module.$name";
         $content = (array)system_content('_modules');
-        $value=null;
-        eval('if(isset($content'.$name.')){$value=$content'.$name.';}else{$value=null;}');
-        return $value;
+        return array_get($content,$name);
     }
 }
 
@@ -170,4 +168,12 @@ if(!function_exists('module_temp_json')){
         return null;
     }
 
+}
+
+if (!function_exists('array_value_not_null')){
+    function array_value_not_null($array){
+        return array_where($array, function ($value, $key) {
+            return !is_null($value);
+        });
+    }
 }

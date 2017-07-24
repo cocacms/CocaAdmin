@@ -141,7 +141,7 @@ class MemberController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function _list(){
-        $data = Member::paginate(20);
+        $data = Member::paginate($this->pageSize);
         $data = $data->toArray();
         $data['data'] = collect($data['data'])->map(function ($item){
             $item['avatar'] = asset($item['avatar']);

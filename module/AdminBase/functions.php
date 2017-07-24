@@ -53,3 +53,12 @@ if(!function_exists('hasRoutePermission'))
         }
     }
 }
+
+if (!function_exists('get_dictionary')){
+    function get_dictionary($tag){
+        $dic = \Module\AdminBase\Models\Dictionary::where('tag','=',$tag)->firstOrFail();
+        $dic->content = unserialize($dic->content);
+        $dic->description = base64_decode($dic->description);
+        return $dic;
+    }
+}

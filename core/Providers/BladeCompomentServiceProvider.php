@@ -35,11 +35,11 @@ class BladeCompomentServiceProvider extends ServiceProvider
 
 
         Blade::directive('canshow', function ($expression) {
-            return "<?php if(hasRoutePermission('$expression')){ ?>";
+            return "<?php if(hasRoutePermission('$expression')): ?>";
         });
 
         Blade::directive('endcanshow', function () {
-            return "<?php } ?>";
+            return "<?php endif; ?>";
         });
 
     }

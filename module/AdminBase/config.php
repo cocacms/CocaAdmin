@@ -69,6 +69,13 @@ return [
             "spread" => false
         ],
 
+        [
+            "title" => "宣传滚动栏",
+            "icon" => "coca-icon coca-icon-tubiaozhizuomoban-",
+            "href" => 'route[promo@index]',
+            "spread" => false
+        ],
+
     ],
     'temp'=>[
         'layui' => // 模板使用数组 或者 文字{"code": ${code},"msg": "${msg}","data": {"src": "${data}"}}
