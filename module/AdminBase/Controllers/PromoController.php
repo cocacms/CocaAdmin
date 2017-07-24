@@ -28,7 +28,7 @@ class PromoController extends Controller
      */
     public function index()
     {
-        return $this->view('promo.index',['category'=>\get_dictionary('promo')]);
+        return $this->view('promo.index',['category'=>\dictionary('promo')]);
     }
 
     /**

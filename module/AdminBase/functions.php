@@ -54,11 +54,19 @@ if(!function_exists('hasRoutePermission'))
     }
 }
 
-if (!function_exists('get_dictionary')){
-    function get_dictionary($tag){
+if (!function_exists('dictionary')){
+    function dictionary($tag = 'default'){
         $dic = \Module\AdminBase\Models\Dictionary::where('tag','=',$tag)->firstOrFail();
         $dic->content = unserialize($dic->content);
         $dic->description = base64_decode($dic->description);
         return $dic;
+    }
+}
+
+if (!function_exists('ad')){
+    function ad($tag = 'default'){
+        $ad = \Module\AdminBase\Models\Ad::where('tag','=',$tag)->firstOrFail();
+        $ad->script = base64_decode($ad->script);
+        return $ad;
     }
 }
