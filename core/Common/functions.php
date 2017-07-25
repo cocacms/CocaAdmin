@@ -171,6 +171,11 @@ if(!function_exists('module_temp_json')){
 }
 
 if (!function_exists('array_value_not_null')){
+    /**
+     * 剔除数组中null的项
+     * @param $array
+     * @return array
+     */
     function array_value_not_null($array){
         return array_where($array, function ($value, $key) {
             return !is_null($value);
@@ -179,7 +184,15 @@ if (!function_exists('array_value_not_null')){
 }
 
 if (!function_exists('module_status')){
-    function module_status($name,$status = null){
+
+
+    /**
+     * 模块开启关闭
+     * @param $name
+     * @param null $status
+     * @return bool
+     */
+    function module_status($name, $status = null){
         if (is_null($status)){
             $is = app('cache')->get($name,0);
             return $is == 1;
@@ -187,5 +200,45 @@ if (!function_exists('module_status')){
         }
         app('cache')->forever($name, $status);
         return true;
+    }
+}
+if (!function_exists('module_path')){
+    function module_path($name,$path = null){
+        if (is_null($path)){
+            return base_path('module'.DIRECTORY_SEPARATOR.$name);
+        }else{
+            return base_path('module'.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.$path);
+        }
+    }
+}
+
+
+if (!function_exists('link_module_asset')){
+    function link_module_asset($name){
+        if (!file_exists(module_path($name,'assets'))) {
+            throw new \Exception('The "module/'.$name.'/assets" directory not exists.');
+        }
+
+        if (file_exists(public_path('module'.DIRECTORY_SEPARATOR.$name))) {
+            throw new \Exception('The "module/'.$name.'/assets" directory already exists.');
+        }
+
+        app('files')->link(
+            module_path($name,'assets'), public_path('module'.DIRECTORY_SEPARATOR.$name)
+        );
+
+    }
+}
+
+if (!function_exists('unlink_module_asset')){
+    function unlink_module_asset($name){
+        if (!file_exists(public_path('module'.DIRECTORY_SEPARATOR.$name))) {
+            throw new \Exception('The "module/'.$name.'/assets" directory not exists.');
+        }
+
+        app('files')->delete(
+            public_path('module'.DIRECTORY_SEPARATOR.$name)
+        );
+
     }
 }

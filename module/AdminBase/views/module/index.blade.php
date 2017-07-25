@@ -39,13 +39,13 @@
             <td>
                 @canshow(module@changeStatus)
                     @{{# if(item.auto){ }}
-                        显示
+                        默认开启
                     @{{# }else if(item.status == 1){ }}
                         <input type="checkbox"
                                data-id="@{{ item.id }}"
                                lay-skin="switch"
                                value="1"
-                               lay-text="显示|隐藏" checked
+                               lay-text="启用|关闭" checked
                                lay-filter="switchShow"
                                data-url="{{route('module@changeStatus')}}"
                                checked
@@ -56,16 +56,18 @@
                                 data-id="@{{ item.id }}"
                                 lay-skin="switch"
                                 value="1"
-                                lay-text="显示|隐藏"
+                                lay-text="启用|关闭"
                                 lay-filter="switchShow"
                                 data-url="{{route('module@changeStatus')}}"
                         >
                     @{{# } }}
                 @else
-                    @{{# if(item.status == 1 || item.auto){ }}
-                    显示
+                    @{{# if(item.auto){ }}
+                    默认开启
+                    @{{# }else if(item.status == 1){ }}
+                    已启用
                     @{{# }else{ }}
-                    隐藏
+                    已关闭
                     @{{# } }}
                 @endcanshow
             </td>

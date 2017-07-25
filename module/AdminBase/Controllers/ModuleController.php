@@ -49,6 +49,11 @@ class ModuleController extends Controller
         $name = $request->input('id','AdminBase');
         $show = $request->input('show');
         module_status($name,$show);
+        if ($show == 1){
+            link_module_asset($name);
+        }else{
+            unlink_module_asset($name);
+        }
         return response()->json(success_json());
     }
 }

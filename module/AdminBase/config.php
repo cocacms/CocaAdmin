@@ -9,13 +9,13 @@ return [
             "title" => "后台首页",
             "icon" => "iconfont icon-computer",
             "href" => 'route[home]',
-            "spread" => false
+            "spread" => false,
         ],
         [
             "title" => "系统基本参数",
             "icon" => "coca-icon coca-icon-xitongpeizhi",
             "href" => 'route[system@config]',
-            "spread" => false
+            "spread" => false,
         ],
 
         [
@@ -28,16 +28,19 @@ return [
                     "title" => "角色管理",
                     "icon" => "coca-icon coca-icon-quanxian5",
                     "href" => 'route[role@index]',
-                    "spread" => false
+                    "spread" => false,
+                    "index" => 1
                 ],
                 [
                     "title" => "管理员管理",
                     "icon" => "coca-icon coca-icon-guanwangicon31315",
                     "href" => "route[member@index]",
-                    "spread" => false
+                    "spread" => false,
+                    "index" => 0
                 ],
 
-            ]
+            ],
+            "index" => 998
         ],
         [
             "title" => "分类管理",
@@ -49,23 +52,27 @@ return [
                     "title" => "分类域管理",
                     "icon" => "coca-icon coca-icon-fenleizukuaier",
                     "href" => 'route[category@rootIndex]',
-                    "spread" => false
+                    "spread" => false,
+                    "index" => 1
 
                 ],
                 [
                     "title" => "分类管理",
                     "icon" => "coca-icon coca-icon-cloud-classify",
                     "href" => 'route[category@index]',
-                    "spread" => false
+                    "spread" => false,
+                    "index" => 0
 
                 ]
-            ]
+            ],
+            'index'=>2
         ],
         [
             "title" => "模块管理",
             "icon" => "coca-icon coca-icon-fenleizukuaier",
             "href" => 'route[module@index]',
-            "spread" => false
+            "spread" => false,
+            'index'=> 3
         ],
         [
             "title" => "其他功能",
@@ -93,7 +100,8 @@ return [
                     "href" => 'route[ad@index]',
                     "spread" => false
                 ],
-            ]
+            ],
+            "index" => 999
         ],
 
 

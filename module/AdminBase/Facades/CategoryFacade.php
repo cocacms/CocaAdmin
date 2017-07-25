@@ -7,7 +7,11 @@
  * QQ Group:   647229346
  */
 
-return [
-    Module\AdminBase\Providers\ModuleProvider::class,
-    \Module\AdminBase\Providers\CategoryProvider::class
-];
+namespace Module\AdminBase\Facades;
+use App\Service\ContentService;
+use Illuminate\Support\Facades\Facade;
+
+class CategoryFacade extends Facade
+{
+    protected static function getFacadeAccessor() { return 'category_helper'; }
+}

@@ -13,6 +13,7 @@ namespace Module\AdminBase\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Module\AdminBase\Facades\CategoryFacade;
 
 class HomeController extends Controller
 {
@@ -56,6 +57,17 @@ class HomeController extends Controller
         $permissions = array_unique($permissions);
 
         $menu = $this->handleMenu($menu,$permissions);
+        $menu = collect($menu)->sortBy(function ($item, $key) {
+            return isset($item['index']) ? $item['index'] : $key - 9999999;
+        })->values();
+        $menu = $menu->map(function ($item){
+            if(isset($item['children']) && is_array($item['children']) && count($item['children']) > 0){
+                $item['children'] = collect($item['children'])->sortBy(function ($item, $key) {
+                    return isset($item['index']) ? $item['index'] : $key;
+                })->values()->all();
+            }
+            return $item;
+        })->toArray();
         return response()->json($menu);
     }
 
@@ -86,7 +98,7 @@ class HomeController extends Controller
                 }
 
             }
-            if(isset($item['children']) && count($item['children']) > 0){
+            if(isset($item['children']) && is_array($item['children']) && count($item['children']) > 0){
                 $item['children'] = $this->handleMenu($item['children'],$permissions);
                 if (empty($item['children']))
                     array_splice($menu,$index,1);
