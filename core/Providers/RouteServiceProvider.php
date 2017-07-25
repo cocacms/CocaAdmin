@@ -17,6 +17,14 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
+        $this->modules = $this->app['modules'];
+
+        $this->mapApiRoutes();
+
+        $this->mapWebRoutes();
+
+        $this->mapAdminRoutes();
     }
 
     /**
@@ -26,27 +34,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-
-        //读取模块
-        $current_dir = opendir(base_path('module'));
-        while(($file = readdir($current_dir)) !== false) {
-            if ( $file != '.' && $file != '..')
-            {
-                $cur_path = base_path('module'.DIRECTORY_SEPARATOR.$file);
-                if ( is_dir ( $cur_path ))
-                {
-                    $this->modules[] = $file;
-                }
-            }
-        }
-        closedir($current_dir);
-
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
-        $this->mapAdminRoutes();
-
     }
 
     /**
@@ -73,10 +60,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         $this->loadModuleRoutes('api','api');
-//        Route::prefix('api')
-//            ->middleware('api')
-//            ->namespace($this->namespace)
-//            ->group(base_path('routes/api.php'));
     }
 
     protected function mapAdminRoutes(){
@@ -89,14 +72,14 @@ class RouteServiceProvider extends ServiceProvider
         if($prefix !== null ) $routeConfig['prefix'] = $prefix;
 
         Route::group($routeConfig,function () use ($name){
-            foreach ($this->modules as $module){
-                if(file_exists(base_path('module'.DIRECTORY_SEPARATOR.$module.DIRECTORY_SEPARATOR.'routes'.DIRECTORY_SEPARATOR.$name.'.php'))){
+            foreach ($this->modules as $moduleName => $config){
+                $path = base_path('module'.DIRECTORY_SEPARATOR.$moduleName.DIRECTORY_SEPARATOR.'routes'.DIRECTORY_SEPARATOR.$name.'.php');
+                if (file_exists($path) && ($config['auto'] || module_status($moduleName))){
                     Route::group(
-                        ['namespace'=>'Module\\'.$module.'\\Controllers'],
-                        base_path('module'.DIRECTORY_SEPARATOR.$module.DIRECTORY_SEPARATOR.'routes'.DIRECTORY_SEPARATOR.$name.'.php')
+                        ['namespace'=>'Module\\'.$moduleName.'\\Controllers'], $path
                     );
-
                 }
+
             }
         });
 

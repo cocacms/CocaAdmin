@@ -26,7 +26,7 @@
         <tr>
             <td>网站Logo</td>
             <td style="text-align: left">
-                <img src="{{asset(system_config('weblogo'))}}" style="max-height: 120px" class="layui-circle" id="webLogoImg">
+                <img src="{{asset(system_config('weblogo'))}}" style="max-height: 120px" id="webLogoImg">
                 <br/>
                 <input type="file" name="webLogoFile" class="layui-upload-file" lay-title="更换Logo">
                 <input type="hidden" name="weblogo" class="layui-input cmsName" value="{{system_config('weblogo')}}" >

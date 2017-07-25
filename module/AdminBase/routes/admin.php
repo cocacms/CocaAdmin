@@ -129,6 +129,15 @@ Route::group(['middleware'=>'web'],function(){
 
         },'广告管理');
 
+
+        Route::group(['prefix'=>'module'],function (){
+            Route::get('/list','ModuleController@_list')->name('module@list')->permissionName('获取广告列表');
+            Route::get('/','ModuleController@index')->name('module@index')->link('module@list');
+
+            Route::post('/','ModuleController@changeStatus')->name('module@changeStatus')->permissionName('修改模块状态');
+
+        },'模块管理');
+
     });
 
     Route::get('/login','MemberController@login')->name('admin@login');

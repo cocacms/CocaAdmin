@@ -39,7 +39,7 @@ class HomeController extends Controller
      */
     public function menu()
     {
-        $menu = system_content('system_menu');
+        $menu = get_admin_menu();
         //获取用户权限
         $member = Auth::user();
         $roles = $member->roles;

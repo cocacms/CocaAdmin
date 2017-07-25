@@ -73,7 +73,7 @@ if(!function_exists('get_current_module'))
 if(!function_exists('system_config'))
 {
     /**
-     * 获取系统配置
+     * 获取系统配置 保存在缓存中
      * @param array ...$params
      * @return mixed
      */
@@ -88,7 +88,7 @@ if(!function_exists('system_config'))
 if(!function_exists('system_content'))
 {
     /**
-     * 系统上下文参数
+     * 系统上下文参数 不会缓存 在本次请求结束后清除
      * @param array ...$params
      * @return bool
      */
@@ -127,7 +127,7 @@ if(!function_exists('module_config')){
      */
     function module_config($module, $name){
         $name = "$module.$name";
-        $content = (array)system_content('_modules');
+        $content = app('modules');
         return array_get($content,$name);
     }
 }
@@ -175,5 +175,17 @@ if (!function_exists('array_value_not_null')){
         return array_where($array, function ($value, $key) {
             return !is_null($value);
         });
+    }
+}
+
+if (!function_exists('module_status')){
+    function module_status($name,$status = null){
+        if (is_null($status)){
+            $is = app('cache')->get($name,0);
+            return $is == 1;
+
+        }
+        app('cache')->forever($name, $status);
+        return true;
     }
 }

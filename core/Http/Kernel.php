@@ -2,10 +2,8 @@
 
 namespace App\Http;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Illuminate\Routing\Router;
-use Module\AdminBase\Providers\Components\CRouter;
+
 
 class Kernel extends HttpKernel
 {
@@ -60,32 +58,4 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
-
-
-    public function __construct(Application $app, Router $router)
-    {
-        //load module middleware
-        $modules = [];
-        $current_dir = opendir(base_path('module'));
-        while(($file = readdir($current_dir)) !== false) {
-            if ( $file != '.' && $file != '..')
-            {
-                $cur_path = base_path('module'.DIRECTORY_SEPARATOR.$file);
-                if ( is_dir ( $cur_path ))
-                {
-                    $modules[] = $file;
-                }
-            }
-        }
-        closedir($current_dir);
-        foreach ($modules as $module){
-            $moduleMiddlewareClassName =  '\\Module\\'.$module.'\\ModuleMiddlewares';
-            $moduleMiddlewareClass = new $moduleMiddlewareClassName;
-            $this->middleware = array_merge($this->middleware,$moduleMiddlewareClass->getMiddleware());
-            $this->middlewareGroups = array_merge($this->middlewareGroups,$moduleMiddlewareClass->getMiddlewareGroups());
-            $this->routeMiddleware = array_merge($this->routeMiddleware,$moduleMiddlewareClass->getRouteMiddleware());
-
-        }
-        parent::__construct($app, $router);
-    }
 }

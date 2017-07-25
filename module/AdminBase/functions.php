@@ -55,6 +55,12 @@ if(!function_exists('hasRoutePermission'))
 }
 
 if (!function_exists('dictionary')){
+
+    /**
+     * 根据标识[tag]获取字典
+     * @param string $tag
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
     function dictionary($tag = 'default'){
         $dic = \Module\AdminBase\Models\Dictionary::where('tag','=',$tag)->firstOrFail();
         $dic->content = unserialize($dic->content);
@@ -64,9 +70,27 @@ if (!function_exists('dictionary')){
 }
 
 if (!function_exists('ad')){
+    /**
+     * 根据标识[tag]获取广告
+     * @param string $tag
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
     function ad($tag = 'default'){
         $ad = \Module\AdminBase\Models\Ad::where('tag','=',$tag)->firstOrFail();
         $ad->script = base64_decode($ad->script);
         return $ad;
+    }
+}
+
+if (!function_exists('get_admin_menu')){
+    function get_admin_menu(){
+        $menus = [];
+        $modules = app('modules');
+        foreach ($modules as $name => $config){
+            if (isset($config['menu']) &&($config['auto'] || module_status($name))){
+                $menus[] = $config['menu'];
+            }
+        }
+        return array_collapse($menus);
     }
 }

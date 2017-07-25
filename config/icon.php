@@ -1,5 +1,5 @@
 <?php
 return [
-    'js' => '//at.alicdn.com/t/font_tlojkpgbclqv9529.js',
-    'css' => '//at.alicdn.com/t/font_tlojkpgbclqv9529.css'
+    'js' => '//at.alicdn.com/t/font_arce8wzal3ngsyvi.js',
+    'css' => '//at.alicdn.com/t/font_arce8wzal3ngsyvi.css'
 ];

@@ -46,12 +46,12 @@ class ContentService
 
     private function saveConfig(){
         if(isset($this->content['_config'])){
-            Cache::forever('_system_config',serialize($this->content['_config']));
+            app('cache')->forever('_system_config',serialize($this->content['_config']));
         }
     }
 
     private function loadConfig(){
-        $config = Cache::get('_system_config',serialize([]));
+        $config = app('cache')->get('_system_config',serialize([]));
         $config = unserialize($config);
         $this->content['_config'] = $config;
     }

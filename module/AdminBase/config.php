@@ -61,27 +61,41 @@ return [
                 ]
             ]
         ],
-
         [
-            "title" => "数据字典",
-            "icon" => "coca-icon coca-icon-tubiao17",
-            "href" => 'route[dictionary@index]',
+            "title" => "模块管理",
+            "icon" => "coca-icon coca-icon-fenleizukuaier",
+            "href" => 'route[module@index]',
             "spread" => false
         ],
-
         [
-            "title" => "宣传滚动栏",
-            "icon" => "coca-icon coca-icon-tubiaozhizuomoban-",
-            "href" => 'route[promo@index]',
-            "spread" => false
+            "title" => "其他功能",
+            "icon" => "coca-icon coca-icon-tubiaozhizuomobanzizhi-copy",
+            "href" => '',
+            "spread" => false,
+            "children" =>[
+                [
+                    "title" => "数据字典",
+                    "icon" => "coca-icon coca-icon-tubiao17",
+                    "href" => 'route[dictionary@index]',
+                    "spread" => false,
+
+                ],
+                [
+                    "title" => "宣传滚动栏",
+                    "icon" => "coca-icon coca-icon-tubiaozhizuomoban-",
+                    "href" => 'route[promo@index]',
+                    "spread" => false
+                ],
+
+                [
+                    "title" => "广告管理",
+                    "icon" => "coca-icon coca-icon-guanggao1",
+                    "href" => 'route[ad@index]',
+                    "spread" => false
+                ],
+            ]
         ],
 
-        [
-            "title" => "广告管理",
-            "icon" => "coca-icon coca-icon-guanggao1",
-            "href" => 'route[ad@index]',
-            "spread" => false
-        ],
 
     ],
     'temp'=>[

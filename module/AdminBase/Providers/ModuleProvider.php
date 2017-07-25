@@ -22,9 +22,6 @@ class ModuleProvider extends ServiceProvider
     }
 
     public function register(){
-        $this->app->singleton(Hello::class,function($app){
-            return new Hello();
-        });
     }
 
 }
