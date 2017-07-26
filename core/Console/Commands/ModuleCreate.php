@@ -73,7 +73,8 @@ class ModuleCreate extends Command
             'migrations'=>null,
             'Models'=>null,
             'Providers'=>[
-                'Components'=>null
+                'Components'=>null,
+                'ModuleServiceProvider.php'=>null
             ],
             'routes'=>[
                 'admin.php'=>null,
