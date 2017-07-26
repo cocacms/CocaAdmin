@@ -1,0 +1,13 @@
+<?php
+return [
+    'name' => '', //模块名称
+    'description' => '', //模块描述
+    'author' => '', //作者
+    'auto' => false, //自动开启
+    'menu' => [
+
+    ],
+    'temp'=>[
+
+    ]
+];

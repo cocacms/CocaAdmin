@@ -19,7 +19,7 @@ class ModuleCreate extends Command
      *
      * @var string
      */
-    protected $description = 'create a module';
+    protected $description = 'Create a module';
 
 
     /**
@@ -29,6 +29,7 @@ class ModuleCreate extends Command
      */
     protected $files;
 
+    protected $moduleName;
     /**
      * Create a new command instance.
      *
@@ -48,38 +49,66 @@ class ModuleCreate extends Command
      */
     public function handle()
     {
-        $moduleName = $this->argument('name');
-        $modulePath = base_path('module'.DIRECTORY_SEPARATOR.$moduleName);
+        $this->moduleName = studly_case($this->argument('name'));
+        $modulePath = module_path($this->moduleName);
         if($this->files->exists($modulePath)){
-            $this->error('module '.$moduleName.' already exists!');
+            $this->error('module '.$this->moduleName.' already exists!');
             return false;
         }
 
         if (! $this->files->makeDirectory($modulePath, 0777, true, true)) {
-            $this->error('create module '.$moduleName.' error!');
+            $this->error('create module '.$this->moduleName.' error!');
             return false;
         }
 
-        $childDir = [
-            'Facades',
-            'Model',
-            'Providers',
-            'Controllers',
-            'Middleware',
-            'routes'
+        $dir = [
+            'assets' =>[
+                'css'=>null,
+                'js'=>null,
+                'resources'=>null,
+            ],
+            'Controllers'=>null,
+            'Facades'=>null,
+            'Middleware'=>null,
+            'migrations'=>null,
+            'Models'=>null,
+            'Providers'=>[
+                'Components'=>null
+            ],
+            'routes'=>[
+                'admin.php'=>null,
+                'api.php'=>null,
+                'web.php'=>null
+            ],
+            'views'=>null,
+            'config.php'=>null,
+            'functions.php'=>null,
+            'ModuleMiddlewares.php'=>null,
+            'ModuleProviders.php'=>null,
         ];
+        $this->handleFile('',$dir);
+        $this->info($this->moduleName  .' Module created successfully.');
+    }
 
-        foreach ($childDir as $dir){
-            $this->files->makeDirectory($modulePath.DIRECTORY_SEPARATOR.$dir, 0777, true, true);
+    private function handleFile($parent,$dirs){
+        $parent = empty($parent)? $parent : $parent.DIRECTORY_SEPARATOR;
+        foreach ($dirs as $dir => $child){
+            if (is_null($child) && ends_with($dir,'.php')){
+                //创建文件
+                $stub = $this->files->get(__DIR__.'/stubs/module/'.$dir.'.stub');
+                $stub = str_replace('MODULE_NAME',$this->moduleName,$stub);
+                $this->files->put(module_path($this->moduleName,$parent.$dir), $stub);
+            }else{
+                if(!$this->files->exists(module_path($this->moduleName,$parent.$dir))){
+                    $this->files->makeDirectory(module_path($this->moduleName,$parent.$dir), 0777, true, true);
+                }
+
+                if (!is_null($child) && is_array($child)){
+                    $this->handleFile($parent.$dir,$child);
+                }
+
+            }
+
         }
-
-        $childFile = [
-            'routes'.DIRECTORY_SEPARATOR.'admin.php' => null,
-            'routes'.DIRECTORY_SEPARATOR.'web.php' => null,
-            'routes'.DIRECTORY_SEPARATOR.'api.php' => null,
-            'ModuleProviders.php',
-            'ModuleMiddleware.php',
-            'functions.php'
-        ];
     }
 }
