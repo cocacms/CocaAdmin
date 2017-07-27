@@ -32,7 +32,7 @@ class PromoController extends Controller
     }
 
     /**
-     * 获取列表数据
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function _list(Request $request)

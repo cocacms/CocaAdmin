@@ -6,7 +6,7 @@
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
@@ -79,10 +79,10 @@
 						<a href="javascript:;"><i class="iconfont icon-gonggao"></i><cite>系统公告</cite></a>
 					</li>
 			    	<li class="layui-nav-item" mobile>
-			    		<a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>设置</cite></a>
+			    		<a href="javascript:;" data-url="{{route('changeInfo')}}"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>设置</cite></a>
 			    	</li>
 			    	<li class="layui-nav-item" mobile>
-			    		<a href="page/login/login.html"><i class="iconfont icon-loginout"></i> 退出</a>
+			    		<a href="{{route('logout')}}"><i class="iconfont icon-loginout"></i> 退出</a>
 			    	</li>
 					<!--
 					<li class="layui-nav-item lockcms" pc>
@@ -151,5 +151,6 @@
 
 	@jsimport(leftNav)
 	@jsimport(index)
+	{{--@jsimport(default-passive-events)--}}
 </body>
 </html>

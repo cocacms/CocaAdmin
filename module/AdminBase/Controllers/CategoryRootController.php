@@ -12,6 +12,7 @@ namespace Module\AdminBase\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Module\AdminBase\Facades\CategoryFacade;
 use Module\AdminBase\Models\Category;
 
 class CategoryRootController extends Controller
@@ -85,6 +86,7 @@ class CategoryRootController extends Controller
         $root = Category::findOrFail($id);
         $root->name = $input['name'];
         $root->tag = $input['tag'];
+        CategoryFacade::handleUpdated($root);
         if($root->save()){
             return response()->json(success_json());
         }else{

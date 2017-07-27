@@ -25,10 +25,10 @@ layui.define(["element","jquery"],function(exports){
 			//显示左侧菜单
 			if($(".navBar").html() == ''){
 				var _this = this;
-				$(".navBar").html(navBar(data)).height($(window).height()-245);
+				$(".navBar").html(navBar(data));
 				element.init();  //初始化页面元素
 				$(window).resize(function(){
-					$(".navBar").height($(window).height()-245);
+					// $(".navBar").height($(window).height()-245);
 				})
 			}
 		})
@@ -178,8 +178,14 @@ layui.define(["element","jquery"],function(exports){
 				        }
 				        top_tabs.style.left = x +"px";
 				        //阻止页面的滑动默认事件
-				        document.addEventListener("touchmove",function(){
-				            event.preventDefault();
+				        document.addEventListener("touchmove",function(event){
+                            // 判断默认行为是否可以被禁用
+                            if (event.cancelable) {
+                                // 判断默认行为是否已经被禁用
+                                if (!event.defaultPrevented) {
+                                    event.preventDefault();
+                                }
+                            }
 				        },false);
 				    }
 				}

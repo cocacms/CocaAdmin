@@ -178,7 +178,7 @@ layui.config({
         var url = $(this).data('url');
         var id = $(this).data('id');
         var index = layui.layer.open({
-            title : "编辑数据字典",
+            title : "编辑宣传滚动栏",
             type : 2,
             content : url +"/"+id,
             success : function(layero, index){

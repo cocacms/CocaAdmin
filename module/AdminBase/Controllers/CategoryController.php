@@ -10,6 +10,7 @@ namespace Module\AdminBase\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Module\AdminBase\Facades\CategoryFacade;
 use Module\AdminBase\Models\Category;
 
 class CategoryController extends Controller
@@ -158,6 +159,7 @@ class CategoryController extends Controller
         }
         $category->name = $input['name'];
         $category->tag = $input['tag'];
+        CategoryFacade::handleUpdated($category);
         if($category->save()){
             return response()->json(success_json());
         }else{

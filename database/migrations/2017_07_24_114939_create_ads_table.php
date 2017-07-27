@@ -19,7 +19,7 @@ class CreateAdsTable extends Migration
             $table->string('name');
             $table->string('tag',25)->unique();
             $table->text('script');
-            $table->integer('show')->length(1)->default(1); //1显示 0不显示
+            $table->integer('show')->default(1); //1显示 0不显示
             $table->timestamps();
         });
     }

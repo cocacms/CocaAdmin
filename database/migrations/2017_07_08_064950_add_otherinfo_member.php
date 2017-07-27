@@ -14,7 +14,7 @@ class AddOtherinfoMember extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->integer('sex')->length(1)->default(0); //性别 0-未知 1-男 2-女
+            $table->integer('sex')->default(0); //性别 0-未知 1-男 2-女
             $table->string('tel',11)->nullable(); //手机
             $table->string('mail',60)->nullable(); //邮箱
             $table->date('birthday')->nullable(); //生日

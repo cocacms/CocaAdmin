@@ -23,14 +23,14 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">分类名</label>
+            <label class="layui-form-label">字典名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" value="{{$dictionary->name}}" class="layui-input" lay-verify="required" placeholder="请输入分类名">
+                <input type="text" name="name" value="{{$dictionary->name}}" class="layui-input" lay-verify="required" placeholder="请输入字典名">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">分类描述</label>
+            <label class="layui-form-label">字典描述</label>
             <div class="layui-input-block">
                 <textarea id="description" name="description" style="display: none;">{{$dictionary->description}}</textarea>
             </div>

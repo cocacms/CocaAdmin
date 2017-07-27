@@ -13,7 +13,6 @@ layui.config({
     });
     form.on("submit(submit)",function(data){
         data.field.description = layedit.getContent(editor);
-        console.log(data.field);
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
         var url = $(this).data('url');
         $.ajax({

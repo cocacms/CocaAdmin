@@ -55,7 +55,7 @@
 #top_tabs_box{ padding-right:138px; height:40px; border-bottom:1px solid #e2e2e2; }
 #top_tabs{ position: absolute; border-bottom:none;}
 /*多窗口页面操作下拉*/
-.closeBox{ position:absolute; right:0; background-color:#fff; color:#000; border-left:1px solid #e2e2e2; }
+.closeBox{ position:absolute; right:0; background-color:#fff!important; color:#000; border-left:1px solid #e2e2e2; }
 .closeBox .layui-nav-item{ line-height:40px; }
 .closeBox .layui-nav-item a,.closeBox .layui-nav-item a:hover{ color:#000; }
 .closeBox .layui-nav-more{ top:17px; }
@@ -191,4 +191,32 @@
 
 .layui-table, .layui-table th {
 	text-align: center;
+}
+.table_list{
+	width: 100%;
+	overflow-x: auto;
+}
+#table{
+	min-width: 1000px;
+}
+
+@media screen and (max-width:432px){
+	#table{
+		width: 1000px;
+	}
+}
+
+select[multiple]{
+	border: 1px solid #e6e6e6;
+	display: block;
+	width: 100%;
+	padding-left: 10px;
+	min-height: 150px;
+}
+
+select[multiple] option{
+	font-size: 14px;
+	height: 28px;
+	box-sizing: border-box;
+	padding-top: 5px;
 }

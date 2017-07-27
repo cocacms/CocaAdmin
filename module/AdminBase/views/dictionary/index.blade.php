@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', '管理员管理')
+@section('title', '管理')
 
 @section('content')
     <blockquote class="layui-elem-quote">

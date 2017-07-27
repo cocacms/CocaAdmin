@@ -162,7 +162,7 @@ class ModuleControllerMakeCommand extends GeneratorCommand
 
         $model = trim(str_replace('/', '\\', $model), '\\');
 
-        if (! Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
+        if (! Str::startsWith($model, $rootNamespace = "Module\\$this->module\\Models\\")) {
             $model = $rootNamespace.$model;
         }
 

@@ -15,6 +15,7 @@ class DummyClass extends Migration
     {
         if(!Schema::hasTable('DummyTable')){
             Schema::create('DummyTable', function (Blueprint $table) {
+                $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->timestamps();
             });
@@ -29,6 +30,6 @@ class DummyClass extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('DummyTable');
+        Schema::dropIfExists('DummyTable');
     }
 }

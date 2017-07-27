@@ -14,7 +14,7 @@ class AddSuperadminToMember extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->integer('supper')->length(1)->default(0); //超级管理员 0 不是 1 是
+            $table->integer('supper')->default(0); //超级管理员 0 不是 1 是
         });
     }
 

@@ -25,9 +25,9 @@ class ModuleMiddlewares
      */
     protected $middlewareGroups = [
         'coca-admin-check' =>[
+            'web',
             'auth:admin',
             'permission',
-            'web'
         ]
 
     ];

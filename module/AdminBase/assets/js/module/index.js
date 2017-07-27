@@ -1,21 +1,16 @@
 layui.config({
-}).use(['form','layer','jquery','laytpl','laypage'],function(){
+}).use(['form','layer','jquery','laytpl'],function(){
     var form = layui.form(),
         layer = parent.layer === undefined ? layui.layer : parent.layer,
         laytpl = layui.laytpl,
-        laypage = layui.laypage,
         $ = layui.jquery;
 
-    var currentPage = 1;
 
     //加载页面数据
-    var loadData = function (page) {
+    var loadData = function () {
         var url = $('#table').data('url');
         $.ajax({
             url : url,
-            data:{
-                page:page
-            },
             type : "get",
             dataType : "json",
             success : function(data){
@@ -28,7 +23,7 @@ layui.config({
         });
 
     };
-    loadData(currentPage);
+    loadData();
 
 
 
@@ -63,16 +58,6 @@ layui.config({
             $('.table_content').html(html);
             form.render();
         });
-        currentPage = that.current_page;
-        laypage({
-            cont : "page",
-            pages : that.last_page,
-            curr : that.current_page,
-            jump : function(obj){
-                if(that.current_page != obj.curr)
-                    loadData(obj.curr,currentCategory)
-            }
-        })
     }
 
 

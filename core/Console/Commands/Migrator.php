@@ -231,7 +231,7 @@ class Migrator
 
         if (count($allCanRollback) == 0) return [];
         if (($steps = Arr::get($options, 'step', 0)) > 0) {
-            return array_slice($allCanRollback,-1,$steps);
+            return array_slice($allCanRollback,-$steps);
         } else {
             return [last($allCanRollback)];
         }

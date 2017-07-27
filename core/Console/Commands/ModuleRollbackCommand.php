@@ -30,7 +30,7 @@ class ModuleRollbackCommand extends BaseCommand
     /**
      * The migrator instance.
      *
-     * @var \Illuminate\Database\Migrations\Migrator
+     * @var \App\Console\Commands\Migrator
      */
     protected $migrator;
 

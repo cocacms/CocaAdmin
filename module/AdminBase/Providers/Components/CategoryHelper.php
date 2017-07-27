@@ -10,21 +10,42 @@
 namespace Module\AdminBase\Providers\Components;
 
 use Module\AdminBase\Models\Category;
+use Closure;
 
 class CategoryHelper
 {
     protected $links = [];
-    public function buildTree($tag,$withSelf = false)
+    protected $hooks = [];
+    public function buildTree($tag = null,$withSelf = false)
     {
-        $root = Category::where('tag','=',$tag)->firstOrFail();
-        if ($withSelf){
-            $categories = $root->getDescendants();
+        $categories = collect();
+
+        if(is_null($tag)){
+            $roots = Category::roots()->get();
+            $ancestors = $roots->map(function ($root){
+                $rootAndDescendants = $root->getDescendantsAndSelf();
+                return $rootAndDescendants;
+            });
+
+
+            foreach ($ancestors as $ancestor){
+                foreach ($ancestor as $item){
+                    $categories->push($item);
+                }
+            }
         }else{
-            $categories = $root->getDescendantsAndSelf();
+            $root = Category::where('tag','=',$tag)->firstOrFail();
+            if (!$withSelf){
+                $categories = $root->getDescendants();
+            }else{
+                $categories = $root->getDescendantsAndSelf();
+            }
         }
+
         return $categories->map(function ($descendant){
+            $descendant->tname = $descendant->name;
             if ($descendant->isRoot()){
-                $descendant->name = $descendant->name.' [域]';
+                $descendant->name = $descendant->name.' [根域]';
                 return $descendant;
             }
             $descendant->name = str_repeat('　', $descendant->depth).'∟'.$descendant->name;
@@ -33,15 +54,21 @@ class CategoryHelper
 
     }
 
-    public function register(\Closure $closure){
-        $this->links[] = $closure;
+    public function registerUpdatedHook($root,Closure $closure){
+        $this->hooks[$root][] = $closure;
     }
 
-    public function allLink(){
-        $links = [];
-        foreach ($this->links as $closure){
-            $links[] = $closure();
+    public function handleUpdated($obj)
+    {
+        foreach ($this->hooks as $root => $hooks){
+            $rootCategory = Category::where('tag','=',$root)->firstOrFail();
+            if ($rootCategory->isSelfOrAncestorOf($obj)){
+                foreach ($hooks as $hook){
+                    if ($hook instanceof Closure){
+                        $hook($obj);
+                    }
+                }
+            }
         }
-        return $links;
     }
 }

@@ -23,7 +23,7 @@ class CreatePromosTable extends Migration
             $table->text('description')->nullable();
             $table->text('content')->nullable();
             $table->string('pic')->nullable();
-            $table->integer('show')->length(1)->default(1); //1显示 0不显示
+            $table->integer('show')->default(1); //1显示 0不显示
             $table->integer('order')->default(0); //ASC
             $table->timestamps();
         });
