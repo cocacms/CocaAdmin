@@ -219,6 +219,10 @@ if (!function_exists('link_module_asset')){
             throw new \Exception('The "module/'.$name.'/assets" directory not exists.');
         }
 
+        if (!file_exists(public_path('module'))) {
+            throw new \Exception('The "'.public_path('module').'" directory not exists, please create at first.');
+        }
+
         if (file_exists(public_path('module'.DIRECTORY_SEPARATOR.$name))) {
             throw new \Exception('The "module/'.$name.'/assets" directory already exists.');
         }
