@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
     <link rel="stylesheet" href="{{config('icon.css')}}" media="all" />
     <link rel="stylesheet" href="{{ asset('/module/AdminBase/css/main.css') }}" media="all" />
-@section("cssImport")
+    @section("cssImport")
     @show
 </head>
 <body class="childrenBody">
@@ -58,6 +58,6 @@
     <script type="text/javascript" src="{{config('icon.js')}}"></script>
     {{--<script type="text/javascript" src="{{ asset('/module/AdminBase/js/default-passive-events.js') }}"></script>--}}
     @section("jsImport")
-@show
+    @show
 </body>
 </html>

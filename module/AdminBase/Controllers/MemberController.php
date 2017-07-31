@@ -42,7 +42,7 @@ class MemberController extends Controller
         }
         $member = Member::where([
             ['username','=',$data['username']],
-        ])->firstOrFail();
+        ])->first();
 
         if(is_null($member)){
             return response()->json(error_json('账户不存在！'));

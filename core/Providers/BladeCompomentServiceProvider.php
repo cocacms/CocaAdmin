@@ -26,6 +26,20 @@ class BladeCompomentServiceProvider extends ServiceProvider
             return  "<link rel=\"stylesheet\" href=\"<?php echo asset('/module/'.get_current_module().'/css/".$expression.".css'); ?>\" media=\"all\" />";
         });
 
+
+        Blade::directive('import',function ($expression){
+            $expression = explode(',',$expression);
+            $module = '\'.get_current_module().\'';
+            if (count($expression) >= 3) $module = $expression[2];
+            if ($expression[1] == 'css'){
+                return  "<link rel=\"stylesheet\" href=\"<?php echo asset('/module/".$module."/".$expression[0].".css'); ?>\" media=\"all\" />";
+            }else{
+                return  "<script type=\"text/javascript\" src=\"<?php echo asset('/module/".$module."/".$expression[0].".js'); ?>\"></script>";
+            }
+
+        });
+
+
         Blade::directive('captcha', function ($expression) {
             $expression = explode(',',$expression);
             $w = $expression[0];

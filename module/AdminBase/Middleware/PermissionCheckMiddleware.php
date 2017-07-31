@@ -7,9 +7,8 @@
  * QQ Group:   647229346
  */
 
-namespace Module\AdminBase\Middlewares;
+namespace Module\AdminBase\Middleware;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class PermissionCheckMiddleware

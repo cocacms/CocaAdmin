@@ -2,8 +2,8 @@
 namespace Module\AdminBase;
 
 use App\Http\Middleware\ModuleMiddlewareBase;
-use Module\AdminBase\Middlewares\PermissionCheckMiddleware;
-use Module\AdminBase\Middlewares\Test;
+use Module\AdminBase\Middleware\MemberToViewMiddleware;
+use Module\AdminBase\Middleware\PermissionCheckMiddleware;
 
 class ModuleMiddlewares
 {
@@ -16,6 +16,7 @@ class ModuleMiddlewares
      * @var array
      */
     protected $middleware = [
+
     ];
 
     /**
@@ -24,6 +25,9 @@ class ModuleMiddlewares
      * @var array
      */
     protected $middlewareGroups = [
+        'web'=>[
+            MemberToViewMiddleware::class
+        ],
         'coca-admin-check' =>[
             'web',
             'auth:admin',

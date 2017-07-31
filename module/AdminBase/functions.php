@@ -83,6 +83,10 @@ if (!function_exists('ad')){
 }
 
 if (!function_exists('get_admin_menu')){
+    /**
+     * 获取管理菜单
+     * @return array
+     */
     function get_admin_menu(){
         $menus = [];
         $modules = app('modules');
@@ -92,5 +96,16 @@ if (!function_exists('get_admin_menu')){
             }
         }
         return array_collapse($menus);
+    }
+}
+
+if (!function_exists('promo')){
+    function promo($tag,$limit = null){
+        $promo = \Module\AdminBase\Models\Promo::where('tag','=',$tag)->orderBy('order');
+            if (!is_null($limit)){
+                $promo = $promo->limit($limit);
+            }
+        $promo = $promo->get();
+        return $promo;
     }
 }

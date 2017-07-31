@@ -1,6 +1,6 @@
 var $;
 layui.config({
-}).use(['form','layer','jquery','layedit'],function(){
+}).use(['form','layer','jquery','layedit','upload'],function(){
     var form = layui.form(),
         layer = parent.layer === undefined ? layui.layer : parent.layer,
         $ = layui.jquery,
@@ -9,6 +9,18 @@ layui.config({
     var editor =layedit.build('content',{
         uploadImage:{
             url : window.uploadUrl + "?name=file&temp=layui&module=AdminBase"
+        }
+    });
+
+    layui.upload({
+        url : window.uploadUrl+'?name=file',
+        success: function(res){
+            if(res.code == 0){
+                $('#file').attr('src',window.baseUrl+res.data);
+                $('[name=pic]').val(res.data);
+            }else{
+                layer.alert(data.msg, {icon: 2});
+            }
         }
     });
 

@@ -3,12 +3,12 @@
 
 @section('content')
     <blockquote class="layui-elem-quote">
-        @canshow(role@edit)
+        @canshow(member@edit)
         <div class="layui-inline">
             <a class="layui-btn add_btn" style="background-color:#5FB878" data-url="{{route('member@edit')}}">添加管理员</a>
         </div>
         @endcanshow
-        @canshow(role@del)
+        @canshow(member@del)
         <div class="layui-inline">
             <a class="layui-btn layui-btn-danger batch_del" data-url="{{route('member@del')}}">批量删除</a>
         </div>

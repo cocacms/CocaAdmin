@@ -54,6 +54,36 @@ class CategoryHelper
 
     }
 
+    public function getIds($tag = null,$withSelf = false){
+        $categories = collect();
+
+        if(is_null($tag)){
+            $roots = Category::roots()->get();
+            $ancestors = $roots->map(function ($root){
+                $rootAndDescendants = $root->getDescendantsAndSelf();
+                return $rootAndDescendants;
+            });
+
+
+            foreach ($ancestors as $ancestor){
+                foreach ($ancestor as $item){
+                    $categories->push($item);
+                }
+            }
+        }else{
+            $root = Category::where('tag','=',$tag)->firstOrFail();
+            if (!$withSelf){
+                $categories = $root->getDescendants();
+            }else{
+                $categories = $root->getDescendantsAndSelf();
+            }
+        }
+
+        return $categories->map(function ($descendant){
+            return $descendant->id;
+        })->toArray();
+    }
+
     public function registerUpdatedHook($root,Closure $closure){
         $this->hooks[$root][] = $closure;
     }
