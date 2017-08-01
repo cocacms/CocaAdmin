@@ -96,13 +96,13 @@ Route::group(['middleware'=>'web'],function(){
 
         Route::group(['prefix'=>'promo'],function (){
             Route::get('/list','PromoController@_list')->name('promo@list')->permissionName('获取宣传滚动栏列表');
-            Route::get('/','PromoController@index')->name('promo@index')->link('dictionary@list');
+            Route::get('/','PromoController@index')->name('promo@index')->link('promo@list');
 
             Route::post('/','PromoController@postAdd')->name('promo@postAdd')->permissionName('创建宣传滚动栏');
-            Route::get('/addPage','PromoController@add')->name('promo@add')->link('dictionary@postAdd');
+            Route::get('/addPage','PromoController@add')->name('promo@add')->link('promo@postAdd');
 
             Route::post('/edit/{id}','PromoController@postEdit')->name('promo@postEdit')->permissionName('编辑宣传滚动栏');
-            Route::get('/edit/{id}','PromoController@edit')->name('promo@edit')->link('dictionary@postEdit');
+            Route::get('/edit/{id}','PromoController@edit')->name('promo@edit')->link('promo@postEdit');
 
             Route::delete('/','PromoController@del')->name('promo@del')->permissionName('删除宣传滚动栏');
 

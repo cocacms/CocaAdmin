@@ -60,7 +60,7 @@
                 </li>
             @else
                 <li>
-                    {{$_user->nickname or $_user->username}}
+                    <a href="{{route('order@my')}}">{{$_user->nickname or $_user->username}}</a>
                 </li>
                 <li>
                     <a href="{{route('web@logout')}}"> 退出</a>
@@ -69,7 +69,7 @@
 
 
             <li>
-                <a href="shopcart.html"><span class="am-icon-shopping-cart"></span></a>
+                <a href="{{route('cart@index')}}"><span class="am-icon-shopping-cart"></span></a>
             </li>
         </ul>
         <div class="login">

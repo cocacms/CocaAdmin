@@ -45,6 +45,12 @@
                 if (value.length < minmax[0] || value.length > minmax[1]) {
                     return '输入长度必须'+minmax[0]+'到'+minmax[1]+'位';
                 }
+            },
+            price: function(value, item){
+                var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+                if (!reg.test(value)) {
+                    return '请输入正确的金额数';
+                }
             }
         });
 

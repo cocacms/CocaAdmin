@@ -16,6 +16,5 @@ function adjust(is){
 			h = $(window).height() - $('.header').height() - $('.am-navbar').height() - 6;
 		}
 		$('.main-content').css('min-height',h+'px');
-		console.log(h+'px');
 	}
 }

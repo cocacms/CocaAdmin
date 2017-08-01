@@ -1,6 +1,22 @@
 body{
 	background: whitesmoke;
 }
+
+.no-select {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Chrome/Safari/Opera */
+	-khtml-user-select: none; /* Konqueror */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}
+
+.am-btn:active:focus, .am-btn:focus {
+	outline: none;
+}
+:focus {
+	outline: none;
+}
 .am-icon-plus-square,.am-icon-minus-square{
 	cursor: pointer;
 }
@@ -113,6 +129,9 @@ body{
 .am-slider-a1 .am-control-nav li a.am-active {
     background-color: #fff;
     cursor: default;
+}
+.products [class*=am-u-]+[class*=am-u-]:last-child {
+	float: left;
 }
 .products{
 	padding-top: 3rem;
@@ -302,6 +321,8 @@ h2 {
 }
 .shopping-cart .box table .number{
 	width: 70px;
+	padding: 5px;
+	box-sizing: border-box;
 }
 .shopping-cart .box table button{
 	border:none;
