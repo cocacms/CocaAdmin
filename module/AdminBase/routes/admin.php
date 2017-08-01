@@ -41,7 +41,7 @@ Route::group(['middleware'=>'web'],function(){
             Route::post('/edit/{id?}','MemberController@submit')->name('member@submit')->permissionName('编辑创建管理员');
             Route::get('/edit/{id?}','MemberController@edit')->name('member@edit')->link('member@submit');
 
-            Route::delete('/del','MemberController@del')->name('member@del')->permissionName('删除用户');
+            Route::delete('/del','MemberController@del')->name('member@del')->permissionName('删除管理员');
 
         },'管理员管理');
 
@@ -131,7 +131,7 @@ Route::group(['middleware'=>'web'],function(){
 
 
         Route::group(['prefix'=>'module'],function (){
-            Route::get('/list','ModuleController@_list')->name('module@list')->permissionName('获取广告列表');
+            Route::get('/list','ModuleController@_list')->name('module@list')->permissionName('获取模块列表');
             Route::get('/','ModuleController@index')->name('module@index')->link('module@list');
 
             Route::post('/','ModuleController@changeStatus')->name('module@changeStatus')->permissionName('修改模块状态');
