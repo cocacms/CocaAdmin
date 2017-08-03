@@ -247,6 +247,7 @@ h2 {
 
 #header-bars ul li a{
 	color: #fff;
+	display: block;
 }
 
 .am-navbar-default .am-navbar-nav {
@@ -373,7 +374,7 @@ h2 {
 }
 
 .order-list .detail{
-	border: 1px solid #bbb;
+	/*border: 1px solid #bbb;*/
 }
 .order-list ul{
 	list-style: none;
@@ -414,8 +415,7 @@ h2 {
 }
 .order-list .order-calculate{
 	text-align: right;
-	border: 1px solid #bbb;
-	border-top:none;
+	border-bottom: 1px solid #bbb;
 	padding-right: 20px;
 	height: 40px;
 	line-height: 40px;
@@ -441,6 +441,30 @@ h2 {
 	top: 10px;
 	left: 20px;
 }
+
+.pagination{
+	text-align: center;
+}
+.pagination li{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	color: #000000;
+	border: 1px solid #000000;
+	font-size: 14px;
+	line-height: 28px;
+	cursor: pointer;
+}
+
+.pagination li.active{
+	background: #000000;
+	color: #FFFFFF;
+}
+
+.pagination li.disabled{
+	opacity: .45;
+	cursor: not-allowed;
+}
 @media only screen and (max-width: 640px){
 	.header{
 		height: 42px;
@@ -461,6 +485,8 @@ h2 {
 	    height: 42px;
 	    line-height: 42px;
 	    padding-right: 20px;
+		padding-left: 20px;
+		z-index: 999999999999;
 	}
 	.shopping-cart .box {
 	    padding: 5px;
@@ -493,6 +519,12 @@ h2 {
 	.order-list{
 	    margin-left: -20px;
     	margin-right: -20px;
+	}
+
+	.order-list>ul>li>p{
+		margin-bottom: 5px;
+		padding-left: 10px;
+		margin-top: 0px;
 	}
 
 	.order-list ul .detail .item{
@@ -530,6 +562,13 @@ h2 {
 
 	.shopcartbox{
 		border:none!important;
+	}
+
+	.pagination{
+		padding: 0px 10px!important;
+	}
+	.pagination li{
+		margin-bottom: 5px;
 	}
 
 }

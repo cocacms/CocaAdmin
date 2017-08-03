@@ -33,7 +33,7 @@
     <meta name="msapplication-TileColor" content="#0e90d2">
 
     <link rel="stylesheet" href="{{asset('web/css/amazeui.min.css')}}" media="all" />
-    <link rel="stylesheet" href="{{asset('web/css/app.css')}}" media="all" />
+    <link rel="stylesheet" href="{{asset('web/css/app.css?v=2')}}" media="all" />
 
     @section("cssImport")
     @show
@@ -72,8 +72,8 @@
                 <a href="{{route('cart@index')}}"><span class="am-icon-shopping-cart"></span></a>
             </li>
         </ul>
-        <div class="login">
-            <span class="am-icon-bars am-show-sm am-icon-sm" data-am-offcanvas="{target: '#header-bars', effect: 'push'}"></span>
+        <div class="login" onclick="javascript:void(0);" data-am-offcanvas="{target: '#header-bars', effect: 'push'}">
+            <span class="am-icon-bars am-show-sm am-icon-sm"></span>
         </div>
     </div>
 </div>
@@ -84,12 +84,26 @@
     <div class="am-offcanvas-bar am-offcanvas-bar-flip">
         <div class="am-offcanvas-content">
             <ul>
-                <li>
-                    <a href="{{route('web@login')}}">登录账户</a>
-                </li>
-                @foreach(pagers($category_helper->getIds('header')) as $pager)
-                    <li><a href="{{route('pager@show',['tag' => $pager->tag])}}">{{$pager->name}}</a></li>
-                @endforeach
+
+                @if(is_null($_user))
+                    <li>
+                        <a href="{{route('web@login')}}">登录账户</a>
+                    </li>
+                    @foreach(pagers($category_helper->getIds('header')) as $pager)
+                        <li><a href="{{route('pager@show',['tag' => $pager->tag])}}">{{$pager->name}}</a></li>
+                    @endforeach
+                @else
+                    <li>
+                        <a href="{{route('order@my')}}">{{$_user->nickname or $_user->username}}</a>
+                    </li>
+                    @foreach(pagers($category_helper->getIds('header')) as $pager)
+                        <li><a href="{{route('pager@show',['tag' => $pager->tag])}}">{{$pager->name}}</a></li>
+                    @endforeach
+                    <li>
+                        <a href="{{route('web@logout')}}"> 退出</a>
+                    </li>
+                @endif
+
             </ul>
         </div>
     </div>
@@ -99,19 +113,19 @@
 <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default am-show-sm" id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4">
         <li >
-            <a href="index.html" class="">
+            <a href="{{route('pager@home')}}" class="">
                 <span class="am-icon-home"></span>
                 <span class="am-navbar-label">首页</span>
             </a>
         </li>
         <li >
-            <a href="shopcart.html" class="">
+            <a href="{{route('cart@index')}}" class="">
                 <span class="am-icon-shopping-cart"></span>
                 <span class="am-navbar-label">购物车</span>
             </a>
         </li>
         <li >
-            <a href="my.html" class="">
+            <a href="{{route('order@my')}}" class="">
                 <span class="am-icon-user"></span>
                 <span class="am-navbar-label">我的</span>
             </a>

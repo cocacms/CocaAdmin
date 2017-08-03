@@ -3,6 +3,7 @@
 /public/storage
 /public/module
 /storage/*.key
+/storage/excel_cache/*
 /vendor
 /.idea
 /.vagrant
@@ -12,3 +13,4 @@ npm-debug.log
 .env
 /module/*
 !/module/AdminBase
+public/excel/*

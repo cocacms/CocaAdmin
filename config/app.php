@@ -64,7 +64,7 @@ $config = [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('TIMEZONE','Asia/Shanghai'),
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +185,8 @@ $config = [
         App\Providers\BladeCompomentServiceProvider::class,
         App\Providers\ContentServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
     ],
 
@@ -234,6 +236,8 @@ $config = [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

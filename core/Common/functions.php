@@ -178,7 +178,7 @@ if (!function_exists('array_value_not_null')){
      */
     function array_value_not_null($array){
         return array_where($array, function ($value, $key) {
-            return !is_null($value);
+            return !is_null($value) && $value != 'null';
         });
     }
 }

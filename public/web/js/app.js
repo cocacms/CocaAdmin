@@ -1,10 +1,10 @@
 $(function(){
 	adjust(false)
-})
+});
 
 $(window).resize(function(){
 	adjust(true)
-})
+});
 
 function adjust(is){
 	if($('body').height() < $(window).height() || is){
