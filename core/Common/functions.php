@@ -231,10 +231,6 @@ if (!function_exists('link_module_asset')){
             module_path($name,'assets'), public_path('module'.DIRECTORY_SEPARATOR.$name)
         );
 
-        app('files')->chmod(
-            public_path('module'.DIRECTORY_SEPARATOR.$name),0777
-        );
-
     }
 }
 
@@ -243,9 +239,6 @@ if (!function_exists('unlink_module_asset')){
         if (!file_exists(public_path('module'.DIRECTORY_SEPARATOR.$name))) {
             throw new \Exception('The "module/'.$name.'" directory not exists.');
         }
-        app('files')->chmod(
-            public_path('module'.DIRECTORY_SEPARATOR.$name),0777
-        );
 
         app('files')->delete(
             public_path('module'.DIRECTORY_SEPARATOR.$name)
