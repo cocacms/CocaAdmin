@@ -6,18 +6,10 @@ layui.config({
 		tips = layer.tips
 	;
 
-    function getCookie(name)
-    {
-        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-        if(arr=document.cookie.match(reg))
-            return unescape(arr[2]);
-        else
-            return null;
-    }
 
     $.ajaxSetup({
         headers: {
-            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
+            'X-XSRF-TOKEN':  $('meta[name="csrf-token"]').attr('content')
         }
     });
 
