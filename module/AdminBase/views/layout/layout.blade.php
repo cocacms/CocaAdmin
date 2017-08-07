@@ -28,6 +28,7 @@
     layui.config({
     }).use(['jquery','form'],function(){
         var $  = layui.jquery;
+        var jQuery = layui.jquery;
         var form = layui.form();
         form.verify({
             username: function(value, item) {
@@ -54,15 +55,23 @@
             }
         });
 
+        function getCookie(name)
+        {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
             }
         });
     });
 </script>
     <script type="text/javascript" src="{{config('icon.js')}}"></script>
-    {{--<script type="text/javascript" src="{{ asset('/module/AdminBase/js/default-passive-events.js') }}"></script>--}}
     @section("jsImport")
     @show
 </body>

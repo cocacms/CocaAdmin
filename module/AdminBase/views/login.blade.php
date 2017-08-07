@@ -21,7 +21,6 @@
 	<div class="login">
 	    <h1>登录管理后台</h1>
 	    <form class="layui-form">
-			{{ csrf_field() }}
 	    	<div class="layui-form-item">
 				<input class="layui-input" name="username" placeholder="用户名" lay-verify="required" type="text" autocomplete="off">
 		    </div>
