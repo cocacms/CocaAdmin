@@ -54,6 +54,28 @@ class CategoryHelper
 
     }
 
+
+    public function buildTreeById($id,$withSelf = false)
+    {
+        $root = Category::where('id','=',$id)->firstOrFail();
+        if (!$withSelf){
+            $categories = $root->getDescendants();
+        }else{
+            $categories = $root->getDescendantsAndSelf();
+        }
+
+        return $categories->map(function ($descendant){
+            $descendant->tname = $descendant->name;
+            if ($descendant->isRoot()){
+                $descendant->name = $descendant->name.' [根域]';
+                return $descendant;
+            }
+            $descendant->name = str_repeat('　', $descendant->depth).'∟'.$descendant->name;
+            return $descendant;
+        })->toArray();
+
+    }
+
     public function getIds($tag = null,$withSelf = false){
         $categories = collect();
 
@@ -77,6 +99,20 @@ class CategoryHelper
             }else{
                 $categories = $root->getDescendantsAndSelf();
             }
+        }
+
+        return $categories->map(function ($descendant){
+            return $descendant->id;
+        })->toArray();
+    }
+
+    public function getIdsById($id,$withSelf = false){
+
+        $root = Category::where('id','=',$id)->firstOrFail();
+        if (!$withSelf){
+            $categories = $root->getDescendants();
+        }else{
+            $categories = $root->getDescendantsAndSelf();
         }
 
         return $categories->map(function ($descendant){
