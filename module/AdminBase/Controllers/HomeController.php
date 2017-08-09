@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Module\AdminBase\Facades\CategoryFacade;
+use Module\Shop\Models\Order;
+use Module\User\Models\User;
 
 class HomeController extends Controller
 {
@@ -31,7 +33,33 @@ class HomeController extends Controller
      * @return \Illuminate\Foundation\Application|mixed
      */
     public function home(){
-        return $this->view('home');
+
+        $all_count_user = User::count();
+        $wait_count_order = Order::where('status','=',Order::STATUS_PAYED)->count();
+        $all_count_order = Order::where('status','<>',Order::STATUS_CREATE)->count();
+
+        $year = date("Y");
+        $month = date("m");
+        $day = date("d");
+        $start = mktime(0,0,0,$month,$day,$year);//当天开始时间戳
+        $end= mktime(23,59,59,$month,$day,$year);//当天结束时间戳
+
+        $today_amount_order = Order::whereBetween('created_at',[now(null,$start),now(null,$end)])
+            ->whereIn('status',[Order::STATUS_PAYED,Order::STATUS_SEND])
+            ->sum('amount');
+
+        $all_amount_order = Order::whereIn('status',[Order::STATUS_PAYED,Order::STATUS_SEND])
+            ->sum('amount');
+
+
+        return $this->view('home',[
+            'new_count_user'=>\Illuminate\Support\Facades\Cache::get('user_plus_count',0),
+            'all_count_user'=>$all_count_user,
+            'wait_count_order'=>$wait_count_order,
+            'all_count_order' => $all_count_order,
+            'today_amount_order' => $today_amount_order,
+            'all_amount_order' => $all_amount_order
+        ]);
     }
 
     /**
