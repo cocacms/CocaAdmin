@@ -506,22 +506,53 @@ h2 {
 	display: inline-block;
 }
 
-.article-list ul{
+.article-list2 ul{
 	list-style: none;
 }
-.article-list ul li{
+.article-list2 ul li{
 	border-bottom: 1px dashed gray;
 	padding: 5px;
 }
-.article-list ul a{
+.article-list2 ul a{
 	color: #000000;
 	display: block;
 }
-.article-list ul .time{
+.article-list2 ul .time{
 	float: right;
 	color: gray;
 	font-size: 14px;
 	padding-right: 20px;
+}
+
+.article-list ul{
+	list-style: none;
+}
+
+.article-list ul li{
+	border-bottom: 1px dashed gray;
+	padding: 5px;
+	padding-left: 170px;
+	position: relative;
+	height: 120px;
+}
+.article-list ul li:last-child{
+	border-bottom: none;
+}
+.article-list ul li img{
+	position: absolute;
+	width: 160px;
+	height:120px;
+	left: 0px;
+	top: 0px;
+}
+.article-list ul li p{
+	font-size: 21px;
+	margin:10px;
+}
+.article-list ul li p.time{
+	color: #525252;
+	font-size: 15px;
+
 }
 .header .nav .child{
 	display: none;
@@ -772,6 +803,32 @@ h2 {
 	.product-detail .controller-bar{
 		margin-bottom: 10px;
 		font-size: 14px;
+	}
+
+
+	.article-list ul li{
+		border-bottom: 1px dashed gray;
+		padding: 5px;
+		padding-left: 100px;
+		position: relative;
+		height: 70px;
+	}
+
+	.article-list ul li img{
+		position: absolute;
+		width: 100px;
+		height:70px;
+		left: 0px;
+		top: 0px;
+	}
+	.article-list ul li p{
+		font-size: 15px;
+		margin:3px;
+	}
+	.article-list ul li p.time{
+		color: #525252;
+		font-size: 10px;
+
 	}
 }
 
