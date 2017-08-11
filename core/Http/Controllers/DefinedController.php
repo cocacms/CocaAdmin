@@ -42,7 +42,7 @@ class DefinedController extends Controller
             if(is_null($file)){
                 $result = error_json('没有获取到上传的文件！',1,'');
             }else{
-                $path = $file->store('uploads','public');
+                $path = $file->store('uploads/'.now('Ymd'),'public');
                 $result = success_json(Storage::url($path));
             }
         }catch (\Exception $e){

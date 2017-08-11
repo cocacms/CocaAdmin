@@ -109,3 +109,27 @@ if (!function_exists('promo')){
         return $promo;
     }
 }
+
+if (!function_exists('route_parse')){
+    function route_parse($str)
+    {
+        if (stripos($str, '://') === false) {
+            try {
+                $url = explode('|', $str);
+                $params = [];
+                if (count($url) > 2) {
+                    foreach ($url as $index => $item) {
+                        if ($index != 0 && count($itemParams = explode('=', $item)) >= 2) {
+                            $params[$itemParams[0]] = $itemParams[1];
+                        }
+                    }
+                }
+                return route($url[0], $params);
+            } catch (\Exception $e) {
+                return '#';
+            }
+        } else {
+            return $str;
+        }
+    }
+}

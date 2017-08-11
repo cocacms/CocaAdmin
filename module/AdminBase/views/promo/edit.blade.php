@@ -22,7 +22,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">链接</label>
             <div class="layui-input-block">
-                <input type="text" name="link" value="{{$promo->link}}" placeholder="请输入链接/路由 路由参数用|隔开 例 admin@index|id=1|type=update" autocomplete="false" class="layui-input">
+                <input type="text" name="link" value="{{$promo->link}}" placeholder="请输入链接（http://或https://开头）/路由 路由参数用|隔开 例 admin@index|id=1|type=update" autocomplete="false" class="layui-input">
             </div>
         </div>
 

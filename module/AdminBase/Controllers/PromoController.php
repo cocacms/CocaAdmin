@@ -132,22 +132,6 @@ class PromoController extends Controller
         }
         $data['content'] = base64_encode($data['content']);
         $data['show'] = is_null($data['show']) ? 0 : $data['show'];
-//        if ($is_router == 'on'){
-//            $data['url'] = explode('|',$data['url']);
-//            $params = [];
-//            if (count($data['url']) > 2){
-//                foreach ($data['url'] as $index=>$item){
-//                    if ($index != 0 && count($itemParams = explode('=',$item)) >= 2){
-//                        $params[$itemParams[0]] = $itemParams[1];
-//                    }
-//                }
-//            }
-//            try{
-//                $data['url'] = route($data['url'][0],$params);
-//            }catch (\Exception $e){
-//                return response()->json(error_json($e->getMessage()));
-//            }
-//        }
         $data = array_value_not_null($data);
         try{
             if(is_null($id)){
