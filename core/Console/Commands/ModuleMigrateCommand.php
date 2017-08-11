@@ -47,7 +47,7 @@ class ModuleMigrateCommand extends Command
             '--seed' => $this->option('seed'),
             '--step' => $this->option('step'),
             '--path' => [
-                "module\\$module\\migrations"
+                ".".DIRECTORY_SEPARATOR."module".DIRECTORY_SEPARATOR."$module".DIRECTORY_SEPARATOR."migrations"
             ],
 
         ]);
