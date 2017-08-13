@@ -68,4 +68,12 @@ class DefinedController extends Controller
         return view('notPermission');
 
     }
+
+    public function error($msg)
+    {
+        return view('error',[
+            'msg'=>$msg
+        ]);
+
+    }
 }

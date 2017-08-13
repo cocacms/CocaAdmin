@@ -34,6 +34,22 @@ a:focus, a:hover {
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 5px rgba(0, 0, 0, 0.27);
 }
 
+
+.am-btn-black {
+	color: #fff;
+	background-color: #000000;
+	border-color: #000000;
+}
+
+.am-btn-black:focus, .am-btn-black:hover {
+	background-color: #000000;
+}
+
+.am-btn-black.am-active, .am-btn-black:active, .am-btn-black:focus, .am-btn-black:hover, .am-btn-black.am-dropdown-toggle {
+	color: #fff;
+	border-color: #000000;
+}
+
 .header{
 	width: 100%;
 	height: 80px;
@@ -438,13 +454,24 @@ h2 {
 }
 .order-list .info>div{
 	display: inline-block;
-	font-size: 22px;
+	font-size: 14px;
 }
 .order-list .info .title{
 }
 .order-list .info .count{
 	float: right;
 	text-align: right;
+	color: #0C0C0C;
+}
+.order-list .info .count span{
+	font-weight: bold;
+}
+.order-list .info .count .green{
+	color: green;
+}
+
+.order-list .info .count .red{
+	color: red;
 }
 .order-list .order-calculate{
 	text-align: right;
@@ -666,6 +693,33 @@ h2 {
 	margin-bottom: 10px;
 	font-size: 20px;
 }
+
+.order-list-action{
+	height: 30px;
+	line-height: 30px;
+	margin-top: -10px!important;
+}
+
+.order-list-action li{
+	color: #FFFFFF;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+}
+.order-list-action li.red{
+	background: #dd514c;
+}
+.order-list-action li.gray{
+	background: #e6e6e6;
+	color: #585858;
+}
+.order-list-action li{
+	background: #000;
+}
+.order-list .am-btn-default{
+	color: #585858 !important;
+}
 @media only screen and (max-width: 640px){
 	.header{
 		height: 42px;
@@ -829,6 +883,12 @@ h2 {
 		color: #525252;
 		font-size: 10px;
 
+	}
+	.order-list .info .count{
+		float: left;
+	}
+	.raw .info .count{
+		float: right;
 	}
 }
 

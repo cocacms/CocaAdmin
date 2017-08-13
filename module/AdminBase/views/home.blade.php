@@ -32,7 +32,7 @@
         </div>
 
         <div class="panel col">
-            <a href="javascript:;" data-url="{{route('order@admin@index')}}">
+            <a href="javascript:;" data-url="{{route('order@admin@index',['filter[status]'=>-1])}}">
                 <div class="panel_icon">
                     <i class="layui-icon" data-icon="">&#xe63c;</i>
                 </div>

@@ -56,7 +56,16 @@ class Handler extends ExceptionHandler
                 return redirect(route('notFound'));
             }
         }
-        return parent::render($request, $exception);
+
+        if(config('app.env') == 'production'){
+            if ($request->expectsJson()){
+                return response()->json(error_json($exception->getMessage()));
+            }else{
+                return redirect(route('error',['msg'=>$exception->getMessage()]));
+            }
+        }
+
+        return parent::render($request,$exception);
     }
 
     /**

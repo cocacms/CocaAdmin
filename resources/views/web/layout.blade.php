@@ -112,16 +112,8 @@
                 <i class="am-icon-search"></i>
                 {{csrf_field()}}
                 <input name="_search" type="text" placeholder="请输入关键字搜索商品" value="{{request()->input('_search','')}}">
+                <input type="submit" style="display: none">
             </form>
-            <script language="javascript">
-                document.onkeydown = function(e) {
-                    e = e || window.event;
-                    if(e.keyCode == 13) {
-                        this.forms["_search"].submit();
-                        return false;
-                    }
-                }
-            </script>
         </div>
         <div class="login" onclick="javascript:void(0);" data-am-offcanvas="{target: '#header-bars', effect: 'push'}">
             <span class="am-icon-bars am-show-sm am-icon-sm"></span>
@@ -228,6 +220,13 @@
             alert('请先登录！')
         }
     });
+
+    $("#_search input").keydown(function(event){
+        if(event.keyCode ==13){
+            $("#_search [type=submit]").trigger("click");
+        }
+    });
+
     function handle() {
         var width = $(this).width();
         $(this).children(".child").css('left',(width + 11 )+'px');

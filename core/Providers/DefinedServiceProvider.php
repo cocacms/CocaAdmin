@@ -36,6 +36,9 @@ class DefinedServiceProvider extends ServiceProvider
             Route::get('/notFound','DefinedController@notFound')->name('notFound');
 
             Route::get('/notPermission','DefinedController@notPermission')->name('notPermission');
+
+            Route::get('/error/{msg}','DefinedController@error')->name('error');
+
         });
 
     }

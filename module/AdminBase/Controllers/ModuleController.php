@@ -12,6 +12,7 @@ namespace Module\AdminBase\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class ModuleController extends Controller
 {
@@ -54,6 +55,12 @@ class ModuleController extends Controller
         }else{
             unlink_module_asset($name);
         }
+
+        if (config('app.env') == 'production'){
+            Artisan::call('route:cache');
+            Artisan::call('config:cache');
+        }
+
         return response()->json(success_json());
     }
 }

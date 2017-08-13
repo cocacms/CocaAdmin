@@ -45,10 +45,10 @@ class HomeController extends Controller
         $end= mktime(23,59,59,$month,$day,$year);//当天结束时间戳
 
         $today_amount_order = Order::whereBetween('created_at',[now(null,$start),now(null,$end)])
-            ->whereIn('status',[Order::STATUS_PAYED,Order::STATUS_SEND])
+            ->whereIn('status',[Order::STATUS_PAYED,Order::STATUS_SEND,Order::STATUS_SENDING])
             ->sum('amount');
 
-        $all_amount_order = Order::whereIn('status',[Order::STATUS_PAYED,Order::STATUS_SEND])
+        $all_amount_order = Order::whereIn('status',[Order::STATUS_PAYED,Order::STATUS_SEND,Order::STATUS_SENDING])
             ->sum('amount');
 
 
@@ -108,8 +108,10 @@ class HomeController extends Controller
     private function handleMenu($menu,$permissions){
         foreach ($menu as $index => &$item){
             if(stripos($item['href'],'route[') !== false){
-                $routerName = str_ireplace(['route[',']'],[''],$item['href']);
-                $item['href'] = route($routerName);
+                $routerName = substr($item['href'],6,strlen($item['href']) - 7);
+                $realName = "";
+                $item['href'] = route_parse($routerName,$realName);
+                $routerName = $realName;
                 if(Auth::user()->supper != 1){
                     //过滤没有权限的menu
                     $routeCollection = Route::getRoutes();

@@ -187,6 +187,8 @@ $config = [
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+
 
     ],
 
@@ -238,6 +240,8 @@ $config = [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        'DebugBar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
