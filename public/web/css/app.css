@@ -188,7 +188,9 @@ a:focus, a:hover {
 .products .item{
 	border:1px solid #bbbbbb;
 }
-
+.products .item:hover{
+	border:1px solid #000000;
+}
 .products .item .pic,.products .item .detail{
 	padding: 10px;
 }
@@ -584,7 +586,7 @@ h2 {
 .header .nav .child{
 	display: none;
 	padding-left: 0px;
-	background: #000000;
+	background: rgba(0,0,0,0.5);
 	z-index: 99;
 	min-width: 80px;
 	list-style: none;
@@ -598,6 +600,9 @@ h2 {
 	padding: 0px 5px;
 	width:auto;
 	white-space:nowrap;
+}
+.header .nav .child-item:hover{
+	background-color: #000000;
 }
 .header .nav li:hover>.child,.header .nav li:focus>.child{
 	display: block;
