@@ -40,7 +40,7 @@
 </head>
 <body>
 @inject('category_helper','category_helper')
-<div class="header">
+<div class="header" data-am-sticky>
     <div class="content">
         <div class="logo">
             <a href="{{route('pager@home')}}">
@@ -51,8 +51,8 @@
         <ul class="nav am-hide-sm">
             @foreach(pagers_by_category_ids($category_helper->getIds('header')) as $pager)
 
-                <li>
-                    <a href="{{is_null($pager->jump) ? route('pager@showById',['id' => $pager->id]) : route_parse($pager->jump)}}">{{$pager->name}}</a>
+                <li class="{{pagers_is_current($pager) ? 'active' : ''}}">
+                    <a href="{{route('pager@showById',['id' => $pager->id])}}">{{$pager->name}}</a>
                     @if(isset($pager->additional['category_root']))
                         @php
                             $trees = \Module\AdminBase\Models\Category::where('tag', '=', $pager->additional['category_root'])->first()->getDescendants()->toHierarchy();
@@ -67,7 +67,7 @@
                                     $child .= "</ul>";
 
                                 }
-                                $link = is_null($pager->jump) ? route('pager@showById',['id' => $pager->id , 'category' => $tree->id ]) : route_parse($pager->jump);
+                                $link = route('pager@showById',['id' => $pager->id , 'category' => $tree->id ]);
                                 $html = "
                                 <li class=\"child-item\">
                                 <a href=\"$link\">$tree->name</a>
@@ -133,14 +133,14 @@
                         <a href="{{route('web@login')}}">登录账户</a>
                     </li>
                     @foreach(pagers_by_category_ids($category_helper->getIds('header')) as $pager)
-                        <li><a href="{{is_null($pager->jump) ? route('pager@showById',['id' => $pager->id]) : route_parse($pager->jump)}}">{{$pager->name}}</a></li>
+                        <li><a href="{{route('pager@showById',['id' => $pager->id])}}">{{$pager->name}}</a></li>
                     @endforeach
                 @else
                     <li>
                         <a href="{{route('order@my')}}">{{$_user->nickname or $_user->username}}</a>
                     </li>
                     @foreach(pagers_by_category_ids($category_helper->getIds('header')) as $pager)
-                        <li><a href="{{is_null($pager->jump) ? route('pager@showById',['id' => $pager->id]) : route_parse($pager->jump)}}">{{$pager->name}}</a></li>
+                        <li><a href="{{route('pager@showById',['id' => $pager->id])}}">{{$pager->name}}</a></li>
                     @endforeach
                     <li>
                         <a href="{{route('web@logout')}}"> 退出</a>

@@ -90,6 +90,9 @@ a:focus, a:hover {
 	text-align: center;
 	position: relative;
 }
+.header .nav>li:hover,.header .nav>li.active{
+	background: #2d2d2d;
+}
 .header .login{
 	float: right;
 	height: 80px;
@@ -211,15 +214,24 @@ a:focus, a:hover {
 	font-size: 16px;
 	color: #101010;
 }
-.products .item .detail div{
-	display: inline-block;
-}
-.products .item .detail div:last-child{
-	float: right;
-}
 
+.products .item .detail .no-select{
+	float: right;
+	font-weight: 200;
+}
+.products .item .detail .title{
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.products .item .detail .price{
+	float: left;
+	color: #dd514c;
+}
 .products .item .buttons{
 	padding: 10px 30px;
+	clear: both;
 }
 .products .item .buttons button{
 	width: 46%;
@@ -613,7 +625,8 @@ h2 {
 	top:-1px;
 }
 
-.products-list .pop{
+.products-list .pop,
+.product-detail .pop{
 	display: none;
 	position: absolute;
 	width: 140px;
@@ -626,7 +639,8 @@ h2 {
 	list-style: none;
 	z-index: 999;
 }
-.products-list .pop li{
+.products-list .pop li,
+.product-detail .pop li{
 	display: block;
 	margin: 2px 5px;
 	word-break: break-all;
@@ -635,32 +649,39 @@ h2 {
 	line-height: 30px;
 	border-bottom: 1px dashed #000;
 }
-.products-list .pop li:last-child{
+.products-list .pop li:last-child,
+.product-detail .pop li:last-child{
 	border-bottom: none;
 }
-.products-list .am-breadcrumb>li{
+.products-list .am-breadcrumb>li,
+.product-detail .am-breadcrumb>li{
 	position: relative;
 }
 .products-list .am-breadcrumb>li:hover .pop,
-.products-list .am-breadcrumb>li:focus .pop{
+.products-list .am-breadcrumb>li:focus .pop,
+.product-detail .am-breadcrumb>li:hover .pop,
+.product-detail .am-breadcrumb>li:focus .pop{
 	display: block;
 }
-.products-list .pop li a{
+.products-list .pop li a,
+.product-detail .pop li a{
 	display: block;
 }
-.products-list .pop li a:hover{
+.products-list .pop li a:hover,
+.product-detail .pop li a:hover{
 	font-weight: bold;
 	text-decoration: underline;
 }
-.products-list .toggle:after{
+.products-list .toggle:after,
+.product-detail .toggle:after{
 	content: "▼";
 	font-size: 10px;
 	padding-left: 5px;
 }
 
-.products-list li:hover.toggle:after{
+.products-list li:hover.toggle:after,
+.product-detail li:hover.toggle:after{
 	content: "▲";
-
 }
 
 .am-breadcrumb>.am-active{
@@ -928,7 +949,6 @@ h2 {
 		height: auto;
 	}
 }
-
 @media only screen and (min-width: 1025px){
 
 	.products [class*=am-u-] {
