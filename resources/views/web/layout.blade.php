@@ -25,7 +25,7 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <meta name="apple-mobile-web-app-title" content="{{system_config('webname')}}"/>
     <link rel="apple-touch-icon-precomposed" href="{{asset(system_config('weblogo'))}}">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
