@@ -322,9 +322,11 @@ h2 {
 }
 
 .article .content{
-	// min-height: 670px;
+	min-height: 670px;
 }
-
+.article .content img{
+	max-width: 100%;
+}
 .footer{
 	height: 40px;
 	line-height: 40px;
