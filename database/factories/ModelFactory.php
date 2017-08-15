@@ -25,19 +25,19 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 
 $factory->define(\Module\Shop\Models\Order::class, function (Faker\Generator $faker) {
-    static $password;
+
 
     return [
         'oid' => order_id_create(),
         'uid' => 1,
         'account' => 'test1',
-        'pic' => '/storage/uploads/JcKOQlElYPGRYIKz3y5wQz6UlDyFbPsYZ1bG8sn3.png',
+        'pic' => '/storage/uploads/20170813/9uMGcsJ2wGQfgBMpnUW5l6DEOsdImPVKXcBD1UxR.jpeg',
         'size' => mt_rand(32,44),
         'remark' => str_random(10),
         'addressee' => str_random(10),
         'tel' => str_random(10),
         'address' => str_random(10),
-        'status' => mt_rand(1,3),
+        'status' => mt_rand(1,4),
         'waybill' => str_random(10),
         'waybill_type' => 'sf',
         'amount' => mt_rand(100,3000)
