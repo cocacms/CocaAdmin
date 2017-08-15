@@ -59,19 +59,19 @@ class DefinedController extends Controller
 
     public function notFound()
     {
-        return view('notFound');
+        return view('errors.404');
 
     }
 
     public function notPermission()
     {
-        return view('notPermission');
+        return view('errors.401');
 
     }
 
     public function error($msg)
     {
-        return view('error',[
+        return view('errors.500',[
             'msg'=>$msg
         ]);
 

@@ -26,8 +26,14 @@
     <svg class="icon" aria-hidden="true">
         <use xlink:href="#coca-icon-wuneirong"></use>
     </svg>
-    <p style="font-size: 20px; font-weight: 300; color: #999;">发生未知错误啦!</p>
-    <p style="font-size: 14px; font-weight: 300; color: #c5c5c5;">{{$msg}}</p>
+    <p style="font-size: 20px; font-weight: 300;">发生未知错误啦!</p>
+    @if(config('app.debug'))
+    <p >{{$exception->getMessage()}}</p>
+    <p >{{$exception->getFile()}} Line: {{$exception->getLine()}}</p>
+    @endif
+    {{--@foreach($exception->getTrace() as $trace)--}}
+        {{--<p style="text-align: left;width: 600px;margin: 0 auto;font-size: 14px; font-weight: 300; color: #c5c5c5;">{{$trace['file']}} Line: {{$trace['line']}}</p>--}}
+    {{--@endforeach--}}
 </div>
 <script type="text/javascript" src="{{config('icon.js')}}"></script>
 </body>

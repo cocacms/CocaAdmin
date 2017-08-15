@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -47,24 +48,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $e = $this->prepareException($exception);
-
-        if ($e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException) {
-            if ($request->expectsJson()){
-                return response()->json(error_json('操作的对象并不存在！'));
-            }else{
-                return redirect(route('notFound'));
-            }
-        }
-
-        if(config('app.env') == 'production'){
-            if ($request->expectsJson()){
-                return response()->json(error_json($exception->getMessage()));
-            }else{
-                return redirect(route('error',['msg'=>$exception->getMessage()]));
-            }
-        }
-
         return parent::render($request,$exception);
     }
 
@@ -81,5 +64,26 @@ class Handler extends ExceptionHandler
             return response()->json(error_json('登录超时，请重新登录！'), 401);
         }
         return redirect()->guest(route(empty($exception->guards()) ? '/login' : $exception->guards()[0].'@login'));
+    }
+
+    /**
+     * Prepare response containing exception render.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function prepareResponse($request, Exception $e)
+    {
+        if ($request->expectsJson()){
+            return response()->json(error_json($e->getMessage()));
+        }else{
+            if (!$this->isHttpException($e)) {
+                $e = new HttpException(500,$e->getMessage(),$e);
+                $e->getTraceAsString();
+            }
+            return $this->toIlluminateResponse($this->renderHttpException($e), $e);
+
+        }
     }
 }
