@@ -65,24 +65,4 @@ class Handler extends ExceptionHandler
         }
         return redirect()->guest(route(empty($exception->guards()) ? '/login' : $exception->guards()[0].'@login'));
     }
-
-    /**
-     * Prepare response containing exception render.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception $e
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function prepareResponse($request, Exception $e)
-    {
-        if ($request->expectsJson()){
-            return response()->json(error_json($e->getMessage()));
-        }else{
-            if (!$this->isHttpException($e)) {
-                $e = new HttpException(500,$e->getMessage(),$e);
-            }
-            return $this->toIlluminateResponse($this->renderHttpException($e), $e);
-
-        }
-    }
 }
