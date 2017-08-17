@@ -30,10 +30,11 @@
     @if(config('app.debug'))
     <p >{{$exception->getMessage()}}</p>
     <p >{{$exception->getFile()}} Line: {{$exception->getLine()}}</p>
+        @foreach($exception->getTrace() as $trace)
+            <p style="text-align: left;width: 600px;margin: 0 auto;font-size: 14px; font-weight: 300; color: #c5c5c5;">{{$trace['file']}} Line: {{$trace['line']}}</p>
+        @endforeach
     @endif
-    {{--@foreach($exception->getTrace() as $trace)--}}
-        {{--<p style="text-align: left;width: 600px;margin: 0 auto;font-size: 14px; font-weight: 300; color: #c5c5c5;">{{$trace['file']}} Line: {{$trace['line']}}</p>--}}
-    {{--@endforeach--}}
+
 </div>
 <script type="text/javascript" src="{{config('icon.js')}}"></script>
 </body>

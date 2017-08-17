@@ -80,7 +80,6 @@ class Handler extends ExceptionHandler
         }else{
             if (!$this->isHttpException($e)) {
                 $e = new HttpException(500,$e->getMessage(),$e);
-                $e->getTraceAsString();
             }
             return $this->toIlluminateResponse($this->renderHttpException($e), $e);
 
