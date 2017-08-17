@@ -10,9 +10,9 @@ return [
     'app_id'                    => env('ALI_APP_ID',''),
     'sign_type'                 => env('ALI_SIGN_TYPE',''),// RSA  RSA2
     // 可以填写文件路径，或者密钥字符串  当前字符串是 rsa2 的支付宝公钥(开放平台获取)
-    'ali_public_key'            => env('ALI_PUBLIC_KEY'),
+    'ali_public_key'            => env('ALI_PUBLIC_KEY',''),
     // 可以填写文件路径，或者密钥字符串  我的沙箱模式，rsa与rsa2的私钥相同，为了方便测试
-    'rsa_private_key'           => '',
+    'rsa_private_key'           => env('ALI_RSA_PRIVATE_KEY',''),
     'limit_pay'                 => [
         //'balance',// 余额
         //'moneyFund',// 余额宝
