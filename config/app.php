@@ -189,6 +189,8 @@ $config = [
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Overtrue\LaravelWechat\ServiceProvider::class,
 
     ],
 
@@ -242,6 +244,10 @@ $config = [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
         'DebugBar' => Barryvdh\Debugbar\Facade::class,
+
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+
+        'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
 
     ],
 
