@@ -3,10 +3,9 @@
 Coca-Admin is a general modular web system developed based on  [Laravel 5.4](http://laravel.com/) and [LayuiCMS](https://github.com/BrotherMa/layuiCMS).
 > 声明：本系统采用 [Laravel 5.4](http://laravel.com/) 框架 与  [LayuiCMS前端模板](https://github.com/BrotherMa/layuiCMS) 开发
 本系统目前开发中，存在未知BUG，仅供学习使用请勿用于商业用途，谢谢！
-交流QQ群：647229346
 
 ### 系统特性
-1.  ...(比较懒,以后再写吧..O(∩_∩)O~)
+1.  ...(待完善)
 
 ### 其他开源模块
 1.  [内容管理模块](https://github.com/rojer95/Content).
